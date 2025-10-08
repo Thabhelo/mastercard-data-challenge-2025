@@ -44,7 +44,7 @@ A comprehensive data-driven solution for disaster risk assessment in southern U.
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/Thabhelo/mastercard-data-challenge-2025.git
 cd mastercard-data-challenge-2025
 
 # Create virtual environment
