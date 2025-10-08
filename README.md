@@ -69,10 +69,16 @@ python src/data/fetch_svi_data.py
 python src/models/train_risk_model.py
 ```
 
+### Export Data for Dashboard
+```bash
+python src/export/export_data.py
+```
+
 ### Run Dashboard
 ```bash
-python dashboard/app.py
+python dashboard/server.py
 ```
+Then open http://localhost:8000 in your browser
 
 ## Methodology
 
@@ -87,10 +93,11 @@ python dashboard/app.py
 - **Feature Engineering**: Incorporate IGS, SVI, historical event data
 
 ### Visualization
-- Interactive county-level risk maps
+- D3.js-based interactive dashboard
+- County-level risk maps with TopoJSON
 - Time series analysis of disaster trends
-- Correlation analysis between vulnerability and impact
-- Disaster and county profile pages
+- Vulnerability correlation analysis
+- Minimalistic, data-focused UI
 
 ## Key Features
 
