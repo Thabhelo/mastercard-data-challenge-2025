@@ -34,3 +34,8 @@
 - Download tract boundaries and create centroids
 - Compute nearest facility distance and save draft GeoJSON
 
+
+## Update: 2025-10-10 07:50:26
+- Renamed dashboard-react to frontend
+- Kept fetch utilities for dynamic updates (ACS, TIGER)
+- Pending: upload IGS, hospitals, clinics, HPSA files
