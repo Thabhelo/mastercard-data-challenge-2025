@@ -26,6 +26,13 @@ env/
 ENV/
 .venv
 
+# Node
+node_modules/
+**/node_modules/
+dashboard-react/.vite/
+dashboard-react/dist/
+dashboard-react/.env
+
 # Jupyter Notebook
 .ipynb_checkpoints
 *.ipynb_checkpoints/
