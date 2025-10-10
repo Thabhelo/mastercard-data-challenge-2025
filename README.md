@@ -1,23 +1,23 @@
-# Disaster Risk Management in the U.S. South: Data-Driven Roadmap
+# Healthcare Desert Analysis (Mississippi & Alabama)
 
 ## Overview
 
-A comprehensive data-driven solution for disaster risk assessment in southern U.S. states, integrating hazard data with socioeconomic indicators to identify vulnerable communities and inform resilience strategies.
+A data-first project to identify and explain "Deserts of Care"—neighborhoods with poor access to healthcare—by combining Inclusive Growth Score (IGS) metrics, Census/ACS indicators, and healthcare facility accessibility. Primary focus: Mississippi and Alabama.
 
 ## Project Goals
 
-- Analyze multi-hazard disaster risk across southern states (Florida, Mississippi, Louisiana, Texas, Alabama)
-- Integrate Mastercard Inclusive Growth Score (IGS) to identify economically vulnerable communities
-- Build predictive ML models for disaster risk assessment
-- Provide interactive visualizations for decision-makers and stakeholders
+- Measure healthcare accessibility at census-tract level (drive-time/distance to facilities)
+- Link accessibility with IGS metrics (insurance coverage, income inequality, commercial diversity)
+- Build a composite Health Desert Index and predictive model for desert severity
+- Deliver an interactive React (Vite) dashboard with Mapbox GL visualization
 
 ## Data Sources
 
-- **NOAA Storm Events Database (1950-2025)**: Comprehensive severe weather events
-- **FEMA Disaster Declarations (OpenFEMA API)**: Federal disaster declarations
-- **CDC Social Vulnerability Index (SVI)**: Community vulnerability metrics
-- **Mastercard Inclusive Growth Score (IGS)**: Economic health and inclusion indicators
-- **Billion-Dollar Disasters Dataset**: Major economic loss events
+- **Mastercard Inclusive Growth Score (IGS)**: tract-level insurance coverage, Gini, commercial diversity, labor metrics
+- **Census/ACS 5-year**: B27020 (insurance), B19083 (Gini), B19013 (income), B17001 (poverty)
+- **Healthcare facilities**: CMS Hospital General Info; HRSA Health Centers; pharmacy datasets
+- **HPSA**: HRSA shortage areas (validation)
+- **Census TIGER/Line**: tract boundaries; OpenStreetMap roads (for drive-time)
 
 ## Project Structure
 
@@ -33,8 +33,7 @@ A comprehensive data-driven solution for disaster risk assessment in southern U.
 │   ├── models/          # ML model implementations
 │   ├── visualization/   # Visualization components
 │   └── utils/           # Utility functions
-├── models/              # Trained model artifacts
-├── dashboard/           # Web dashboard application
+├── dashboard-react/     # Vite + React dashboard (Mapbox GL)
 ├── tests/               # Unit tests
 └── docs/                # Documentation
 
@@ -51,70 +50,55 @@ cd mastercard-data-challenge-2025
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install dependencies
+# Install Python dependencies
 pip install -r requirements.txt
 ```
 
 ## Usage
 
-### Data Collection
-```bash
-python src/data/fetch_noaa_data.py
-python src/data/fetch_fema_data.py
-python src/data/fetch_svi_data.py
-```
+### Notebooks (analysis pipeline)
+- `notebooks/01_data_collection_healthcare.ipynb`
+- `notebooks/02_exploratory_analysis.ipynb`
+- `notebooks/03_desert_index_modeling.ipynb`
+- `notebooks/04_spatial_analysis.ipynb`
 
-### Model Training
+### React Dashboard (Vite)
 ```bash
-python src/models/train_risk_model.py
+cd dashboard-react
+npm install
+npm run dev
 ```
-
-### Export Data for Dashboard
-```bash
-python src/export/export_data.py
-```
-
-### Run Dashboard
-```bash
-python dashboard/server.py
-```
-Then open http://localhost:8000 in your browser
 
 ## Methodology
 
 ### Data Processing
-- Aggregate disaster events by county and year
-- Merge hazard data with socioeconomic indicators
-- Create composite vulnerability indices
+- Join IGS/ACS tract metrics with facility accessibility
+- Normalize metrics and compute composite Health Desert Index
+- Prepare tract GeoJSON with attributes for the dashboard
 
 ### Machine Learning Pipeline
-- **Predictive Risk Modeling**: Regression models to predict disaster impact metrics
-- **Risk Classification**: Classify counties as high-risk vs low-risk
-- **Feature Engineering**: Incorporate IGS, SVI, historical event data
+- Predict Desert Severity from IGS + accessibility features (baseline regression, Random Forest)
+- Validate against HPSA and hold-out state
 
 ### Visualization
-- D3.js-based interactive dashboard
-- County-level risk maps with TopoJSON
-- Time series analysis of disaster trends
-- Vulnerability correlation analysis
-- Minimalistic, data-focused UI
+- Mapbox GL choropleth of Health Desert Index at tract level
+- Facility markers, 30-minute isochrones (optional)
+- Correlation and feature-importance charts
 
 ## Key Features
 
-- Multi-hazard analysis (hurricanes, tornadoes, floods, severe storms)
-- Integration of economic inclusion metrics (IGS)
-- Spatial risk assessment at county level
-- Predictive modeling for risk estimation
-- Interactive web dashboard for exploration
+- Healthcare access measurement via distance/drive-time
+- Integration of IGS metrics (insurance, inequality, diversity)
+- Tract-level desert classification and model explainability
+- Interactive dashboard for prioritizing interventions
 
 ## Roadmap
 
-- [x] Phase 1: Project initialization
-- [ ] Phase 2: Data acquisition and processing
-- [ ] Phase 3: Exploratory analysis and feature engineering
-- [ ] Phase 4: Model development and validation
-- [ ] Phase 5: Web dashboard development
-- [ ] Phase 6: Testing and deployment
+- [x] Pivot branch scaffolding
+- [ ] Collect IGS/ACS and facility data (MS/AL)
+- [ ] Build Health Desert Index and baseline model
+- [ ] Export GeoJSON and wire Mapbox choropleth
+- [ ] Insights and policy brief
 
 ## Contributing
 
@@ -130,8 +114,7 @@ For questions or collaboration inquiries, please open an issue in this repositor
 
 ## Acknowledgments
 
-- NOAA National Centers for Environmental Information
-- FEMA OpenFEMA Initiative
-- CDC/ATSDR Social Vulnerability Index
-- Mastercard Center for Inclusive Growth
+- Mastercard Inclusive Growth Score
+- U.S. Census Bureau (ACS)
+- CMS, HRSA datasets
 
