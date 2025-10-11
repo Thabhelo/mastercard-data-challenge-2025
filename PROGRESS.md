@@ -39,3 +39,10 @@
 - Renamed dashboard-react to frontend
 - Kept fetch utilities for dynamic updates (ACS, TIGER)
 - Pending: upload IGS, hospitals, clinics, HPSA files
+
+## Update: 2025-10-11 04:45:21
+- SUCCESS: Found IGS data for Talladega County showing dramatic disparities
+- IGS scores range from 17 to 78 (61-point difference) within same county
+- Converted Excel to CSV: igs_talladega_processed.csv
+- This proves healthcare deserts exist even within single counties
+- Next: Get healthcare facilities data for Talladega County
