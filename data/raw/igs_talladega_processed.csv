@@ -1,9 +1,0 @@
-tract_fips,county,state,year,igs_scores,min_score,max_score,avg_score
-01121010400,Talladega County,Alabama,2017,"[52, 52, 67, 52, 32, 23]",23.0,67,46.333333333333336
-01121010400,Talladega County,Alabama,2018,"[50, 53, 17, 54, 28, 23]",17.0,54,37.5
-01121010400,Talladega County,Alabama,2019,"[50, 56, 52, 56, 25, 22.9]",22.9,56,43.65
-01121010400,Talladega County,Alabama,2020,"[50, 53, 33, 50, 35, 22.9]",22.9,53,40.65
-01121010400,Talladega County,Alabama,2021,"[50, 53, 28, 48, 61, 24.6]",24.6,61,44.1
-01121010400,Talladega County,Alabama,2022,"[47, 51, 43, 34, 21, 24.7]",21.0,51,36.78333333333333
-01121010400,Talladega County,Alabama,2023,"[54, 47, 71, 44, 76, 25.5]",25.5,76,52.916666666666664
-01121010400,Talladega County,Alabama,2024,"[52, 47, 71, 44, 78, 25.5]",25.5,78,52.916666666666664
