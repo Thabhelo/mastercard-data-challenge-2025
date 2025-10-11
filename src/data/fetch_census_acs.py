@@ -1,5 +1,5 @@
 """
-Utilities to fetch ACS 5-year estimates for census tracts in Mississippi and Alabama.
+Utilities to fetch ACS 5-year estimates for census tracts.
 Minimal, dependency-light implementation to construct URLs and document expected workflow.
 """
 

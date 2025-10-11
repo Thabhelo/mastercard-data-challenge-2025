@@ -1,8 +1,8 @@
-# Healthcare Desert Analysis (Mississippi & Alabama)
+# Healthcare Desert Analysis - Talladega County, Alabama
 
 ## Overview
 
-A data-first project to identify and explain "Deserts of Care"—neighborhoods with poor access to healthcare—by combining Inclusive Growth Score (IGS) metrics, Census/ACS indicators, and healthcare facility accessibility. Primary focus: Mississippi and Alabama.
+A data-first project to identify and explain "Deserts of Care"—neighborhoods with poor access to healthcare—by combining Inclusive Growth Score (IGS) metrics with healthcare facility accessibility. **Focus: Intra-county disparities within Talladega County, Alabama.**
 
 ## Project Goals
 
@@ -23,10 +23,7 @@ A data-first project to identify and explain "Deserts of Care"—neighborhoods w
 
 ```
 .
-├── data/
-│   ├── raw/              # Raw data from sources
-│   ├── processed/        # Cleaned and merged datasets
-│   └── external/         # External reference data
+├── data/                 # All data files (IGS, facilities, boundaries)
 ├── notebooks/            # Jupyter notebooks for analysis
 ├── src/
 │   ├── data/            # Data processing scripts

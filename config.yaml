@@ -1,9 +1,8 @@
-# Project Configuration
+# Project Configuration - Healthcare Desert Analysis
 
-# Target States
-target_states:
-  - MS  # Mississippi
-  - AL  # Alabama
+# Target County
+target_county: "Talladega County, Alabama"
+county_fips: "01121"
 
 # Data Sources
 data_sources:
@@ -40,9 +39,9 @@ model:
 # Visualization Settings
 visualization:
   map_center:
-    lat: 30.0
-    lon: -90.0
-  map_zoom: 5
+    lat: 33.4  # Talladega County center
+    lon: -86.1
+  map_zoom: 10
   
   color_scales:
     desert: "Reds"
@@ -50,9 +49,7 @@ visualization:
 
 # Output Paths
 paths:
-  data_raw: "data/raw"
-  data_processed: "data/processed"
-  data_external: "data/external"
+  data: "data"
   models: "models"
   logs: "logs"
 
