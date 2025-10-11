@@ -37,17 +37,18 @@ dashboard-react/.env
 .ipynb_checkpoints
 *.ipynb_checkpoints/
 
-# Data files
-data/raw/*
-data/processed/*
-data/external/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/external/.gitkeep
-*.csv
+# Data files (allow key datasets for hackathon)
+# Allow our specific data files
+!data/igs_talladega_tracts.csv
+!data/tl_2023_01_tract.zip
+!data/tl_2023_28_tract.zip
+!data/*.geojson
+
+# Ignore large data files and temporary data
+data/temp/*
+data/cache/*
 *.xlsx
 *.xls
-*.json
 *.parquet
 *.feather
 *.h5
