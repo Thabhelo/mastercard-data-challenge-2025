@@ -1,25 +1,34 @@
-# Project Configuration - Healthcare Desert Analysis
+# Project Configuration - Income Inequality Reduction Analysis
 
 # Target County
 target_county: "Talladega County, Alabama"
 county_fips: "01121"
 
+# Focus Census Tracts
+target_tract: "01121010500"  # Census Tract 105 (IGS: 23)
+comparison_tract: "01121011100"  # Census Tract 1100 (IGS: 50)
+
 # Data Sources
 data_sources:
   igs:
     portal: "https://inclusivegrowthscore.com/market/us/"
+    description: "Mastercard Inclusive Growth Score - Primary metric for inequality"
   acs:
     api_base: "https://api.census.gov/data"
     dataset: "acs/acs5"
     variables:
-      insurance: "B27020"
       gini: "B19083_001E"
       income: "B19013_001E"
       poverty: "B17001"
-  facilities:
-    hospitals: "CMS Hospital General Information"
-    clinics: "HRSA Health Center Locations"
-    pharmacies: "CMS Part D or NCPDP"
+      education: "B15003"
+      employment: "B23025"
+      housing_cost: "B25070"
+  broadband:
+    source: "FCC Broadband Data"
+    description: "Internet access and adoption rates"
+  business:
+    source: "Census Business Dynamics Statistics"
+    description: "Business creation and ownership diversity"
   geography:
     tracts: "Census TIGER/Line"
 
@@ -28,13 +37,34 @@ model:
   test_size: 0.2
   random_state: 42
   cv_folds: 5
-  
-  # Health Desert thresholds (0-100)
-  desert_thresholds:
-    extreme: 76
-    high: 51
-    moderate: 26
-    low: 0
+
+  # IGS thresholds for intervention prioritization
+  igs_thresholds:
+    high_inclusion: 50  # Target threshold
+    moderate_inclusion: 35
+    low_inclusion: 25
+    critical: 20
+
+# Strategic Intervention Pillars
+intervention_pillars:
+  digital_infrastructure:
+    metrics: ["Internet Access Score"]
+    priority: 1
+  entrepreneurship:
+    metrics: ["Minority/Women Owned Businesses Score", "Small Business Loans Score"]
+    priority: 2
+  housing_transportation:
+    metrics: ["Affordable Housing Score", "Travel Time to Work Score"]
+    priority: 3
+  workforce_development:
+    metrics: ["Labor Market Engagement Index Score", "New Businesses Score"]
+    priority: 4
+  health_wellbeing:
+    metrics: ["Health Insurance Coverage Score"]
+    priority: 5
+  policy_income:
+    metrics: ["Personal Income Score", "Gini Coefficient Score", "Female Above Poverty Score"]
+    priority: 6
 
 # Visualization Settings
 visualization:
@@ -42,10 +72,11 @@ visualization:
     lat: 33.4  # Talladega County center
     lon: -86.1
   map_zoom: 10
-  
+
   color_scales:
-    desert: "Reds"
-    igs: "Blues"
+    inequality: "Reds"  # For Gini coefficient and inequality metrics
+    igs: "Blues"  # For IGS scores
+    income: "Greens"  # For income levels
 
 # Output Paths
 paths:

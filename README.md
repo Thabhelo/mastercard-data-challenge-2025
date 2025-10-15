@@ -1,10 +1,17 @@
 # Reducing Income Inequality in Talladega County, Alabama
 
-## The Challenge: Financial Inclusion in Underserved Communities
+## Overview
 
-This project addresses income inequality and low Inclusive Growth Scores (IGS) in Talladega County, Alabama, with a focus on Census Tract 105 (FIPS: 01121010500), which scores 23 on the IGS scale, well below the 45 threshold for financial inclusion.
+A comprehensive data-driven solution for addressing income inequality and improving financial inclusion in Talladega County, Alabama, with a focus on Census Tract 105 (FIPS: 01121010500), which scores 23 on the IGS scale, well below the 45 threshold for financial inclusion.
 
 **Competition:** Mastercard Data Challenge 2025 - Turn Data Into Impact
+
+## Project Goals
+
+- Analyze income inequality and Inclusive Growth Score (IGS) gaps in Talladega County census tracts
+- Identify proven interventions through comparative analysis (Tract 105 vs Tract 1100)
+- Develop evidence-based strategies across 6 intervention pillars
+- Provide interactive visualizations and quantifiable impact projections
 
 ## The Problem
 
@@ -186,11 +193,22 @@ This project is part of the Mastercard Data Challenge 2025.
 
 MIT License
 
+## Roadmap
+
+- [x] Phase 1: Project initialization and data acquisition
+- [x] Phase 2: Exploratory analysis and tract comparison
+- [x] Phase 3: Strategic intervention pillar development
+- [x] Phase 4: Interactive dashboard development
+- [ ] Phase 5: Data augmentation with external sources
+- [ ] Phase 6: Impact projection modeling and validation
+
 ## Acknowledgments
 
-- Mastercard Inclusive Growth Score
-- U.S. Census Bureau
-- FCC, BLS, HUD for augmentation data sources
+- Mastercard Center for Inclusive Growth
+- U.S. Census Bureau American Community Survey
+- FCC Broadband Data
+- Bureau of Labor Statistics
+- HUD Housing Data
 - Talladega County community stakeholders
 
 ## Contact
