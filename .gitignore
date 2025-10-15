@@ -1,109 +1,18 @@
 # Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual Environment
+*.pyc
 venv/
-env/
-ENV/
-.venv
 
-# Node
+# Node.js
 node_modules/
-**/node_modules/
-dashboard-react/.vite/
-dashboard-react/dist/
-dashboard-react/.env
+frontend/build/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-*.ipynb_checkpoints/
-
-# Data files (allow key datasets for hackathon)
-# Allow our specific data files
-!data/igs_talladega_tracts.csv
-!data/tl_2023_01_tract.zip
-!data/tl_2023_28_tract.zip
-!data/*.geojson
-
-# Ignore large data files and temporary data
-data/temp/*
-data/cache/*
-*.xlsx
-*.xls
-*.parquet
-*.feather
-*.h5
-*.hdf5
-*.pkl
-*.pickle
-
-# Model files
-models/*.pkl
-models/*.h5
-models/*.pt
-models/*.pth
-models/*.joblib
-!models/.gitkeep
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# OS
 .DS_Store
+
+# Data files
+*.zip
+*.tar.gz
 
 # Environment variables
 .env
-.env.local
-
-# Logs
-logs/
-*.log
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-
-# Cache
-.cache/
-*.cache
-
-# Documentation builds
-docs/_build/
-docs/.doctrees/
-
-# System files
-Thumbs.db
-

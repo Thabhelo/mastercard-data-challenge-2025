@@ -1,37 +1,75 @@
-import 'mapbox-gl/dist/mapbox-gl.css'
-import mapboxgl from 'mapbox-gl'
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react';
+import TractComparisonDashboard from './components/TractComparisonDashboard';
+import './App.css';
 
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN || ''
-
-export default function App() {
-  const mapRef = useRef(null)
-  const containerRef = useRef(null)
+function App() {
+  const [comparisonData, setComparisonData] = useState(null);
+  const [tractData, setTractData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!containerRef.current) return
-    if (!mapRef.current) {
-      mapRef.current = new mapboxgl.Map({
-        container: containerRef.current,
-        style: 'mapbox://styles/mapbox/dark-v11',
-        center: [-89.5, 32.8], // MS/AL center
-        zoom: 5,
-        pitch: 45,
-        bearing: -17.6,
-      })
-      mapRef.current.addControl(new mapboxgl.NavigationControl())
-    }
-    return () => {}
-  }, [])
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        
+        const comparisonResponse = await fetch('/data/tract_comparison.json');
+        const comparison = await comparisonResponse.json();
+        setComparisonData(comparison);
+        
+        const csvResponse = await fetch('/data/igs_talladega_tracts.csv');
+        const csvText = await csvResponse.text();
+        setTractData(csvText);
+        
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!import.meta.env.VITE_MAPBOX_TOKEN) {
+    loadData();
+  }, []);
+
+  if (loading) {
     return (
-      <div style={{ padding: 16 }}>
-        <h3>Mapbox token missing</h3>
-        <p>Set VITE_MAPBOX_TOKEN in dashboard-react/.env</p>
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading Talladega County analysis...</p>
       </div>
-    )
+    );
   }
 
-  return <div id="map" ref={containerRef} />
+  if (error) {
+    return (
+      <div className="error-container">
+        <h2>Error loading data</h2>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (!comparisonData) {
+    return (
+      <div className="error-container">
+        <h2>No data available</h2>
+        <p>Please check your data source.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app">
+      <header className="app-header">
+        <div className="team-badge">Team Tornadoes</div>
+        <h1>Talladega County Inequality Analysis</h1>
+        <p className="subtitle">Reducing Income Inequality Through Strategic Interventions</p>
+        <p className="focus-area">Focus: Census Tract 105 - Inclusive Growth Strategy</p>
+      </header>
+
+      <TractComparisonDashboard data={comparisonData} />
+    </div>
+  );
 }
+
+export default App;
