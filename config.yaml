@@ -1,30 +1,27 @@
-# Project Configuration
+# Project Configuration - Healthcare Desert Analysis
 
-# Target States
-target_states:
-  - FL  # Florida
-  - MS  # Mississippi
-  - LA  # Louisiana
-  - TX  # Texas
-  - AL  # Alabama
+# Target County
+target_county: "Talladega County, Alabama"
+county_fips: "01121"
 
 # Data Sources
 data_sources:
-  noaa_storm_events:
-    url: "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/"
-    start_year: 1950
-    end_year: 2025
-  
-  fema_declarations:
-    api_base: "https://www.fema.gov/api/open/v2"
-    endpoint: "/DisasterDeclarationsSummaries"
-  
-  cdc_svi:
-    url: "https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html"
-    year: 2020
-  
-  billion_dollar_disasters:
-    url: "https://www.ncei.noaa.gov/access/billions/"
+  igs:
+    portal: "https://inclusivegrowthscore.com/market/us/"
+  acs:
+    api_base: "https://api.census.gov/data"
+    dataset: "acs/acs5"
+    variables:
+      insurance: "B27020"
+      gini: "B19083_001E"
+      income: "B19013_001E"
+      poverty: "B17001"
+  facilities:
+    hospitals: "CMS Hospital General Information"
+    clinics: "HRSA Health Center Locations"
+    pharmacies: "CMS Part D or NCPDP"
+  geography:
+    tracts: "Census TIGER/Line"
 
 # Model Parameters
 model:
@@ -32,29 +29,27 @@ model:
   random_state: 42
   cv_folds: 5
   
-  # Risk classification thresholds
-  risk_thresholds:
-    high: 0.75
-    medium: 0.50
-    low: 0.25
+  # Health Desert thresholds (0-100)
+  desert_thresholds:
+    extreme: 76
+    high: 51
+    moderate: 26
+    low: 0
 
 # Visualization Settings
 visualization:
   map_center:
-    lat: 30.0
-    lon: -90.0
-  map_zoom: 5
+    lat: 33.4  # Talladega County center
+    lon: -86.1
+  map_zoom: 10
   
   color_scales:
-    risk: "RdYlGn_r"
+    desert: "Reds"
     igs: "Blues"
-    svi: "Reds"
 
 # Output Paths
 paths:
-  data_raw: "data/raw"
-  data_processed: "data/processed"
-  data_external: "data/external"
+  data: "data"
   models: "models"
   logs: "logs"
 

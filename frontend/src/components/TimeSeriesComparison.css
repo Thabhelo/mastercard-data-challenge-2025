@@ -1,0 +1,206 @@
+.time-series-comparison {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-bottom: 2rem;
+}
+
+.chart-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.threshold-line {
+  stroke: #f59e0b;
+  stroke-width: 0.3;
+  stroke-dasharray: 2, 2;
+  opacity: 0.6;
+}
+
+.line-tract-105 {
+  stroke: #dc2626;
+  stroke-width: 2;
+}
+
+.line-tract-1100 {
+  stroke: #10b981;
+  stroke-width: 2;
+}
+
+.chart-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.data-point {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: all;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.data-point:hover,
+.data-point.hovered {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.data-point.selected {
+  transform: translate(-50%, -50%) scale(2);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+.tract-105-point {
+  background: #dc2626;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+}
+
+.tract-1100-point {
+  background: #10b981;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.legend-marker {
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.legend-marker.tract-105 {
+  background: #dc2626;
+}
+
+.legend-marker.tract-1100 {
+  background: #10b981;
+}
+
+.legend-marker.threshold {
+  background: #f59e0b;
+  opacity: 0.6;
+}
+
+.x-axis {
+  position: relative;
+  height: 30px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.x-label {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.5rem;
+}
+
+.y-axis-label {
+  position: absolute;
+  left: -2rem;
+  top: 50%;
+  transform: rotate(-90deg) translateY(-50%);
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.y-axis-ticks {
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.y-tick {
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.tooltip {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  min-width: 200px;
+}
+
+.tooltip-content {
+  position: relative;
+}
+
+.tooltip-content strong {
+  display: block;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.tooltip-content div {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.close-tooltip {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-tooltip:hover {
+  background: #b91c1c;
+}
+

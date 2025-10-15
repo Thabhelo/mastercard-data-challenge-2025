@@ -1,2 +1,0 @@
-# Disaster Risk Management Project
-
