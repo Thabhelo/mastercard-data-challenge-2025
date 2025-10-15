@@ -74,9 +74,6 @@ We use comparative analysis between Census Tract 105 (IGS: 23) and Census Tract 
 git clone https://github.com/Thabhelo/mastercard-data-challenge-2025.git
 cd mastercard-data-challenge-2025
 
-# Switch to analysis branch
-git checkout talladega-tract105-inequality-reduction
-
 # Python setup
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -105,7 +102,6 @@ Output:
 cd frontend
 npm run dev
 ```
-
 Access at: http://localhost:5173
 
 ### Dashboard Features
@@ -157,12 +153,6 @@ Access at: http://localhost:5173
 - **Correlation analysis** - IGS drivers and causal pathways
 - **Evidence-based prioritization** - Proven interventions from Tract 1100
 
-### Data Quality
-- CSV header cleaning to remove export artifacts
-- FIPS code standardization
-- Missing value handling with documented limitations
-- Comprehensive code documentation
-
 ## Competition Alignment
 
 **Scoring Criteria:**
@@ -171,16 +161,6 @@ Access at: http://localhost:5173
 - **Practicality (4 pts):** Quantified, actionable interventions with timelines and impact estimates
 - **Visualization Novelty (3 pts):** Interactive React dashboard with strategic pillars view
 - **Presentation (5 pts):** 10-slide deck with data story and C-suite focus
-
-## Documentation
-
-- **Data Augmentation Plan:** `docs/data_augmentation_plan.md`
-- **Presentation Outline:** `docs/presentation_outline.md`
-- **Analysis Code:** Well-commented Python scripts in `src/analysis/`
-
-## Contributing
-
-This project is part of the Mastercard Data Challenge 2025.
 
 ## License
 
