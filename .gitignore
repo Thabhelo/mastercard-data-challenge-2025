@@ -16,3 +16,8 @@ frontend/build/
 
 # Environment variables
 .env
+
+# .md files
+QUICK_START_GUIDE.md
+DATA_ACQUISITION_SUMMARY.md
+EXTERNAL_DATA_STATUS.md
