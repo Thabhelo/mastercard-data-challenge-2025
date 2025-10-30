@@ -1,8 +1,41 @@
 .time-series-comparison {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: var(--glass-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: var(--gap-lg) var(--gap-xl);
+  margin: 0 auto;
+  margin-bottom: var(--gap-xl);
+  min-width: 320px;
+}
+
+.recharts-wrapper {
+  border-radius: var(--radius-md);
+}
+
+.recharts-surface {
+  background: transparent;
+  border-radius: var(--radius-md);
+}
+
+.recharts-cartesian-axis-tick-value,
+.recharts-cartesian-axis-label {
+  fill: var(--text-tertiary) !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  border-radius: var(--radius-lg);
+  background: #1a1a2edd !important;
+  color: var(--text-main) !important;
+  border: none;
+  padding: var(--gap-md);
+  font-size: 1rem;
+  box-shadow: var(--shadow-low);
+}
+
+.recharts-legend-wrapper {
+  color: var(--text-secondary) !important;
+  font-size: 0.95rem !important;
+  padding-top: var(--gap-xs);
 }
 
 .chart-container {

@@ -1,7 +1,41 @@
 import React from 'react';
-import './InterventionRecommendations.css';
+import { Box, Typography, Chip, Paper, List, ListItem, ListItemIcon, ListItemText, Stack, useTheme, Avatar } from '@mui/material';
+import { motion } from 'framer-motion';
+import WifiIcon from '@mui/icons-material/Wifi';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import GroupWorkIcon from '@mui/icons-material/GroupWork';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
-function InterventionRecommendations({ pillars, tract105, tract1100 }) {
+const recConfig = {
+  digital_infrastructure: {
+    icon: <WifiIcon fontSize="large" sx={{ color: '#00d9ff' }} />, color: '#00d9ff'
+  },
+  entrepreneurship: {
+    icon: <BusinessCenterIcon fontSize="large" sx={{ color: '#ec4899' }} />, color: '#ec4899'
+  },
+  housing_transportation: {
+    icon: <ApartmentIcon fontSize="large" sx={{ color: '#f59e0b' }} />, color: '#f59e0b'
+  },
+  workforce_development: {
+    icon: <GroupWorkIcon fontSize="large" sx={{ color: '#8b5cf6' }} />, color: '#8b5cf6'
+  }
+};
+
+const gridVariants = {
+  visible: { transition: { staggerChildren: 0.13 } }
+};
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.96, y: 20 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.52, type: 'spring', bounce: 0.29 } }
+};
+
+function RecChip({ label, color }) {
+  return <Chip label={label} sx={{ bgcolor: color+'22', color: color, fontWeight: 700, fontSize: 14, px: 1.6, py: 0.6, borderRadius: 99, mr: 1.3 }} />;
+}
+
+function InterventionRecommendations({ pillars }) {
+  const theme = useTheme();
   const recommendations = [
     {
       pillar: 'digital_infrastructure',
@@ -10,11 +44,11 @@ function InterventionRecommendations({ pillars, tract105, tract1100 }) {
       gap: pillars.digital_infrastructure.metrics['Internet Access Score'],
       actions: [
         'Partner with ISPs to deploy last-mile fiber infrastructure',
-        'Publicize Affordable Connectivity Program (ACP) through schools and churches',
-        'Establish digital literacy classes at libraries and community centers',
-        'Launch device lending programs for tablets and laptops'
+        'Publicize Affordable Connectivity Program through local hubs',
+        'Establish digital literacy training',
+        'Launch device lending for households'
       ],
-      impact: 'Could improve IGS by 8-12 points based on Tract 1100 performance',
+      impact: 'Could improve IGS by 8-12 pts',
       timeline: '12-18 months',
       cost: '$$'
     },
@@ -24,12 +58,12 @@ function InterventionRecommendations({ pillars, tract105, tract1100 }) {
       priority: 'HIGH',
       gap: pillars.entrepreneurship.metrics['Minority/Women Owned Businesses Score'],
       actions: [
-        'Partner with CDFIs to offer micro-loans and grants',
-        'Create business incubator with co-working space',
-        'Provide training in business planning and bookkeeping',
-        'Establish procurement set-asides for local small businesses'
+        'Micro-loans and grants for startups',
+        'Business incubator and mentoring',
+        'Business planning and accounting help',
+        'Procurement set-asides for local small business'
       ],
-      impact: 'Could improve IGS by 5-8 points and create 15-20 new businesses',
+      impact: 'Could improve IGS by 5-8 pts, 15-20 new businesses',
       timeline: '9-12 months',
       cost: '$$'
     },
@@ -39,12 +73,12 @@ function InterventionRecommendations({ pillars, tract105, tract1100 }) {
       priority: 'HIGH',
       gap: pillars.housing_transportation.metrics['Affordable Housing Score'],
       actions: [
-        'Leverage Low-Income Housing Tax Credits for new construction',
-        'Renovate vacant properties into mixed-income housing',
-        'Implement rent-to-own programs for low-income families',
-        'Develop county-wide transit system with job center connections'
+        'Leverage housing tax credits',
+        'Renovate vacant properties',
+        'Rent-to-own programs',
+        'Develop public transit links to jobs'
       ],
-      impact: 'Could improve IGS by 6-10 points and reduce housing cost burden',
+      impact: 'Could improve IGS by 6-10 pts, reduce burden',
       timeline: '18-24 months',
       cost: '$$$'
     },
@@ -54,79 +88,73 @@ function InterventionRecommendations({ pillars, tract105, tract1100 }) {
       priority: 'MEDIUM',
       gap: pillars.workforce_development.metrics['Labor Market Engagement Index Score'],
       actions: [
-        'Create apprenticeships in manufacturing and healthcare',
-        'Expand GED completion and adult education programs',
-        'Offer childcare vouchers to enable training participation',
-        'Partner with Honda Manufacturing and local hospitals for curriculum design'
+        'Launch apprenticeships',
+        'GED and adult ed expansion',
+        'Provide child care for trainees',
+        'Employer-partnered curriculum'
       ],
-      impact: 'Could improve IGS by 4-7 points and increase median income',
+      impact: 'Could improve IGS by 4-7 pts',
       timeline: '12-15 months',
       cost: '$$'
     }
   ];
-
-  const filteredRecommendations = recommendations.filter(r => r.gap !== null && Math.abs(r.gap) > 5);
+  const filtered = recommendations.filter(r => typeof r.gap === 'number' && Math.abs(r.gap) > 5);
 
   return (
-    <div className="intervention-recommendations">
-      <div className="recommendations-header">
-        <p className="header-subtitle">
-          Evidence-based interventions to raise Tract 105 IGS from {tract105.igs.latest} to above 45
-        </p>
-      </div>
-
-      <div className="recommendations-grid">
-        {filteredRecommendations.map((rec, index) => (
-          <div key={index} className={`recommendation-card priority-${rec.priority.toLowerCase()}`}>
-            <div className="recommendation-header">
-              <div className="header-top">
-                <h3>{rec.title}</h3>
-                <span className={`priority-badge priority-${rec.priority.toLowerCase()}`}>
-                  {rec.priority}
-                </span>
-              </div>
-              <div className="gap-info">
-                Current gap: <strong>{Math.abs(rec.gap).toFixed(1)} points</strong>
-              </div>
-            </div>
-
-            <div className="recommendation-body">
-              <div className="actions-section">
-                <h4>Key Actions</h4>
-                <ul>
-                  {rec.actions.map((action, i) => (
-                    <li key={i}>{action}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="recommendation-footer">
-                <div className="impact-box">
-                  <span className="label">Expected Impact</span>
-                  <span className="value">{rec.impact}</span>
-                </div>
-                <div className="meta-info">
-                  <span className="timeline">Timeline: {rec.timeline}</span>
-                  <span className="cost">Investment: {rec.cost}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="implementation-note">
-        <h4>Implementation Strategy</h4>
-        <p>
-          Prioritize high-impact interventions in parallel. Begin with digital infrastructure 
-          (foundation for other programs) alongside entrepreneurship support. Coordinate with 
-          federal funding sources: BEAD for broadband, ARPA for community programs, WIOA for 
-          workforce training, and CDBG for housing initiatives.
-        </p>
-      </div>
-    </div>
+    <Box component={motion.div} initial="hidden" animate="visible" variants={gridVariants}
+      sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(4,1fr)' }, gap: 4, width: '100%' }}>
+      {filtered.map((rec, i) => {
+        const recTheme = recConfig[rec.pillar];
+        const showGap = typeof rec.gap === 'number';
+        return (
+          <Paper
+            component={motion.div} variants={cardVariants}
+            elevation={5} key={rec.title}
+            sx={{
+              borderRadius: 4,
+              py: 3, px: 3,
+              background: theme.palette.background.paper,
+              boxShadow: theme.palette.mode === 'dark' ? '0 8px 26px #022e' : '0 2px 12px #bcbcbcff',
+              minWidth: 215,
+              display: 'flex', flexDirection: 'column',
+              gap: 1.3,
+              position: 'relative', overflow: 'visible', mb: 2
+            }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 0.8 }}>
+              <Avatar sx={{ bgcolor: recTheme.color+'22', color: recTheme.color, width: 44, height: 44, boxShadow: theme.shadows[4], mr: 0.6 }}>{recTheme.icon}</Avatar>
+              <Typography variant="h3" fontWeight={700} fontSize={18} sx={{ flex: 1 }}>{rec.title}</Typography>
+              <RecChip label={rec.priority} color={recTheme.color} />
+            </Box>
+            {showGap && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2, mt: 0.5, mb: 0.6 }}>
+                <Typography color={recTheme.color} fontWeight={600} fontSize={16}>Gap:</Typography>
+                <motion.span
+                  initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.47, type: 'spring', bounce: 0.18 }}
+                  style={{ color: recTheme.color, fontWeight: 700, fontSize: 20 }}>
+                  {rec.gap.toFixed(1)} pts
+                </motion.span>
+              </Box>
+            )}
+            <List sx={{ pl: 1, pb: 1, pt: 0.3 }}>
+              {rec.actions.map((action, idx) => (
+                <ListItem disableGutters key={action} component={motion.li} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.23 + idx*0.08 }}>
+                  <ListItemIcon>
+                    <CheckCircleRoundedIcon sx={{ color: recTheme.color, fontSize: 23 }} />
+                  </ListItemIcon>
+                  <ListItemText primary={action} primaryTypographyProps={{ fontSize: 15, color: theme.palette.text.secondary, fontWeight: 500 }} />
+                </ListItem>
+              ))}
+            </List>
+            <Stack direction="row" spacing={2} sx={{ mt: 1.6, flexWrap: 'wrap' }}>
+              <RecChip label={rec.impact} color={recTheme.color} />
+              <RecChip label={rec.timeline} color={theme.palette.secondary.main} />
+              <RecChip label={rec.cost} color={theme.palette.chartBlue || theme.palette.primary.main} />
+            </Stack>
+          </Paper>
+        );
+      })}
+    </Box>
   );
 }
-
 export default InterventionRecommendations;
 
