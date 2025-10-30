@@ -175,7 +175,6 @@ Output:
 cd frontend
 npm run dev
 ```
-
 Access at: http://localhost:5173
 
 ## References
@@ -190,14 +189,20 @@ Access at: http://localhost:5173
 - U.S. Census Bureau. (2022). *American Community Survey 5-Year Estimates, 2018-2022*. Retrieved October 30, 2024, from https://api.census.gov/data/2022/acs/acs5
 - Documentation: https://www.census.gov/programs-surveys/acs/technical-documentation.html
 
-## Acknowledgments
+### Analysis Techniques
+- **Time series analysis** - 8-year trend identification (2017-2024)
+- **Comparative analysis** - Tract 105 vs Tract 1100 gap analysis
+- **Correlation analysis** - IGS drivers and causal pathways
+- **Evidence-based prioritization** - Proven interventions from Tract 1100
 
-- **Mastercard Center for Inclusive Growth** - IGS data and methodology
-- **U.S. Census Bureau** - American Community Survey data
-- **Talladega County, Alabama** - Geographic focus
-- **Community Stakeholders** - (Future) implementation partners
+## Competition Alignment
 
----
+**Scoring Criteria:**
+- **Augmentation (7 pts):** 6+ credible data sources planned
+- **Analysis Richness (6 pts):** Time series, correlation, gap analysis, recommendations
+- **Practicality (4 pts):** Quantified, actionable interventions with timelines and impact estimates
+- **Visualization Novelty (3 pts):** Interactive React dashboard with strategic pillars view
+- **Presentation (5 pts):** 10-slide deck with data story and C-suite focus
 
 ## License
 
