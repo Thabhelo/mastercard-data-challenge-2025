@@ -7,6 +7,7 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import GroupIcon from '@mui/icons-material/Group';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import PredictionCard from './PredictionCard';
 
 const cardIcons = [<TrendingUpIcon fontSize="large" />, <GroupIcon fontSize="large" />, <BusinessCenterIcon fontSize="large" />, <WifiIcon fontSize="large" />];
 
@@ -92,6 +93,12 @@ function TractComparisonDashboard({ data }) {
           <StatCard tract={tract_1100} label="Census Tract 1100" color={theme.palette.secondary.main} icon={<GroupIcon />} />
         </Grid>
       </Grid>
+      {/* Prediction Card Highlight */}
+      <Box sx={{ mb: 6 }}> 
+        <PredictionCard 
+          tractId={tract_105.fips || '1121010500'} 
+          tractName={tract_105.name || 'Census Tract 105'} />
+      </Box>
       <Box sx={{ mb: 5 }}>
         <Typography variant="h2" sx={{ mb: 2, fontWeight: 700, fontSize: '2.0rem' }}>IGS Trends (2017-2024)</Typography>
         <TimeSeriesComparison data={time_series} />
@@ -100,7 +107,7 @@ function TractComparisonDashboard({ data }) {
         <Typography variant="h2" sx={{ mb: 2, fontWeight: 700, fontSize: '2.0rem' }}>Strategic Intervention Pillars</Typography>
         <StrategyPillarsView pillars={strategic_pillars} />
       </Box>
-      <Box sx={{ mb: 5 }}>
+      <Box sx={{ mb: 3 }}>
         <Typography variant="h2" sx={{ mb: 2, fontWeight: 700, fontSize: '2.0rem' }}>Recommended Interventions</Typography>
         <InterventionRecommendations 
           pillars={strategic_pillars}
