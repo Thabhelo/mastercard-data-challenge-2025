@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, Chip, ToggleButton, ToggleButtonGroup, useTheme, Paper } from '@mui/material';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Area, Legend } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
+import { API_ENDPOINTS } from '../config';
 
 const interventionOptions = [
   { key: 'digital', label: 'Digital' },
@@ -11,7 +12,7 @@ const interventionOptions = [
 ];
 
 function fetchPrediction(tractId, interventions) {
-  return fetch('/api/predict', {
+  return fetch(API_ENDPOINTS.predict, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ tract: tractId, interventions })
@@ -28,7 +29,7 @@ function PredictionCard({ tractId, tractName }) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(true);
-    fetch('/api/predict', {
+    fetch(API_ENDPOINTS.predict, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tract: tractId, interventions: active })
