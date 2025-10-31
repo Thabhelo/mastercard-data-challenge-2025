@@ -1,5 +1,4 @@
 {
-  "buildCommand": "npm install && pip install -r requirements.txt && python train_model.py && npm run build",
   "framework": "vite",
   "builds": [
     {

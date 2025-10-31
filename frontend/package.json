@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "pip install -r requirements.txt && python train_model.py && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
