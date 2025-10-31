@@ -7,6 +7,7 @@ venv/
 node_modules/
 frontend/node_modules/
 frontend/build/
+frontend/dist/
 
 # OS
 .DS_Store
@@ -18,3 +19,7 @@ frontend/build/
 # Environment variables
 .env
 .vercel
+
+# Build artifacts
+dist/
+*.log

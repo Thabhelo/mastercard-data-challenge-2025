@@ -1,7 +1,5 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "pip install -r requirements.txt && python train_model.py",
-  "devCommand": "npm run dev",
+  "buildCommand": "pip install -r requirements.txt && python train_model.py && npm run build",
   "framework": "vite",
   "builds": [
     {
