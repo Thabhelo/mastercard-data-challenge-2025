@@ -1,17 +1,4 @@
 {
-  "framework": "vite",
-  "builds": [
-    {
-      "src": "api/predict.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/predict",
-      "dest": "/api/predict.py"
-    }
-  ],
   "headers": [
     {
       "source": "/api/(.*)",
