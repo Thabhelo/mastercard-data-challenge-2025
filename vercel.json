@@ -4,11 +4,16 @@
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "config": {
+        "distDir": "dist"
+      }
     },
     {
-      "src": "frontend/api/predict.py",
-      "use": "@vercel/python"
+      "src": "frontend/api/*.py",
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": ["frontend/api/**"]
+      }
     }
   ],
   "routes": [
