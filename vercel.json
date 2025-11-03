@@ -9,15 +9,15 @@
       }
     },
     {
-      "src": "frontend/api/*.py",
+      "src": "api/*.py",
       "use": "@vercel/python",
       "config": {
-        "includeFiles": ["frontend/api/**"]
+        "includeFiles": ["api/**", "frontend/src/**", "frontend/data/**"]
       }
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "frontend/api/$1.py" },
+    { "src": "/api/(.*)", "dest": "api/$1.py" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
