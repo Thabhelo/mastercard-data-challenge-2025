@@ -4,7 +4,8 @@
   box-shadow: var(--shadow);
   padding: var(--gap-lg) var(--gap-xl);
   margin: 0 auto;
-  margin-bottom: var(--gap-xl);
+  margin-top: var(--gap-xxl);
+  margin-bottom: calc(var(--gap-xxl) * 1.5);
   min-width: 320px;
 }
 

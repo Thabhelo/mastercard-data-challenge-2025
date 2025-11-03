@@ -8,6 +8,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import GroupIcon from '@mui/icons-material/Group';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import PredictionCard from './PredictionCard';
+import { motion } from 'framer-motion';
 
 const cardIcons = [<TrendingUpIcon fontSize="large" />, <GroupIcon fontSize="large" />, <BusinessCenterIcon fontSize="large" />, <WifiIcon fontSize="large" />];
 
@@ -27,28 +28,29 @@ function TractComparisonDashboard({ data }) {
     {
       name: 'Growth',
       key: 'growth',
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
       icon: <TrendingUpIcon />
     },
     {
       name: 'Inclusion',
       key: 'inclusion',
-      color: theme.palette.chartBlue || theme.palette.primary.main,
+      color: theme.palette.primary.main,
       icon: <GroupIcon />
     },
     {
       name: 'Gini Coefficient',
       key: 'gini_coefficient',
-      color: theme.palette.chartPurple || theme.palette.secondary.main,
+      color: theme.palette.primary.main,
       icon: <BusinessCenterIcon />
     }
   ];
 
   const StatCard = ({ tract, label, color, icon }) => (
-    <Paper elevation={4} sx={{
-      borderRadius: 4,
+    <Paper component={motion.div} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} elevation={4} sx={{
+      borderRadius: '20px',
       p: 3,
       minWidth: 220,
+      minHeight: 260,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-start',
@@ -82,7 +84,7 @@ function TractComparisonDashboard({ data }) {
           <StatCard tract={tract_105} label="Census Tract 105" color={theme.palette.primary.main} icon={<GroupIcon />} />
         </Grid>
         <Grid item xs={12} md={2} lg={4} container direction="column" alignItems="center" justifyContent="center">
-          <Paper elevation={0} sx={{ boxShadow: 'none', bgcolor: 'transparent', mt: 5, mb: 7, textAlign: 'center' }}>
+          <Paper component={motion.div} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05 }} elevation={0} sx={{ boxShadow: 'none', bgcolor: 'transparent', mt: 5, mb: 7, textAlign: 'center', borderRadius: '20px' }}>
             <Typography variant="subtitle1" color={theme.palette.text.secondary} fontWeight={500} gutterBottom>
               Gap: <strong style={{ color: theme.palette.primary.main, fontSize: 24 }}>{igsGap.toFixed(1)}</strong> pts
             </Typography>
@@ -93,14 +95,14 @@ function TractComparisonDashboard({ data }) {
           <StatCard tract={tract_1100} label="Census Tract 1100" color={theme.palette.secondary.main} icon={<GroupIcon />} />
         </Grid>
       </Grid>
-      <Box sx={{ mb: 5 }}>
-        <Typography variant="h2" sx={{ mb: 2, fontWeight: 700, fontSize: '2.0rem' }}>IGS Trends (2017-2024)</Typography>
+      <Box sx={{ mt: 6, mb: 6 }}>
+        <Typography variant="h2" sx={{ mb: 3, fontWeight: 700, fontSize: '2.0rem' }}>IGS Trends (2017-2024)</Typography>
         <TimeSeriesComparison data={time_series} />
       </Box>
       {/* Projection Cards: Status Quo vs What-If (side by side) */}
-      <Box sx={{ mb: 6 }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+      <Box sx={{ mt: 12, mb: 16 }}>
+        <Grid container spacing={10}>
+        <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
             <PredictionCard
               tractId={tract_105.fips || '1121010500'}
               tractName={tract_105.name || 'Census Tract 105'}
@@ -109,7 +111,7 @@ function TractComparisonDashboard({ data }) {
               title="5-Year IGS Projection (Status Quo)"
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
             <PredictionCard
               tractId={tract_105.fips || '1121010500'}
               tractName={tract_105.name || 'Census Tract 105'}

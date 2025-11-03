@@ -1,8 +1,8 @@
 /* CSS Theme Variables */
 :root {
-  /* Core background */
-  --primary-bg: #0f0f1e;
-  --secondary-bg: #1a1a2e;
+  /* Core background (light-first like Cap) */
+  --primary-bg: #f2f2f2;
+  --secondary-bg: #ffffff;
 
   /* Accents */
   --accent-blue: #00d9ff;
@@ -23,17 +23,17 @@
   --viz-yellow2: #fbbf24;
 
   /* Text */
-  --text-main: #fff;
-  --text-secondary: #94a3b8;
+  --text-main: #0d1b2a;
+  --text-secondary: #697181;
   --text-tertiary: #64748b;
-  --text-disabled: #334155;
+  --text-disabled: #94a3b8;
 
   /* Borders, Dividers, Glows */
-  --border-subtle: #1e293b;
-  --divider: #334155;
+  --border-subtle: #e5e7eb;
+  --divider: #dde3e9;
 
   /* Card, Element background */
-  --glass-bg: rgba(26,26,46, 0.78);
+  --glass-bg: rgba(255,255,255, 0.78);
   --glass-blur: 12px;
 
   /* Shadows */
@@ -75,6 +75,72 @@ html, body {
 
 body {
   background: var(--primary-bg);
+}
+
+/* Typography scale (inspired by Cap) */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+p,
+span,
+label,
+button,
+input {
+  letter-spacing: 0;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+/* Utility wrappers */
+.wrapper {
+  width: 92%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Shared card style */
+.cap-card {
+  background: #ffffff0d;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+/* Subtle animated reveals */
+@keyframes cap-fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up { animation: cap-fade-in-up .5s var(--ease) both; }
+.fade-in-up-1 { animation-delay: .05s; }
+.fade-in-up-2 { animation-delay: .1s; }
+.fade-in-up-3 { animation-delay: .15s; }
+.fade-in-up-4 { animation-delay: .2s; }
+
+/* Gradient buttons/accents */
+.bg-gradient {
+  background: linear-gradient(60deg, var(--accent-blue), var(--accent-purple));
+}
+
+/* Header underline pulse */
+@keyframes cap-underline-pulse {
+  0% { width: 82px; opacity: .8; }
+  100% { width: 106px; opacity: 1; }
+}
+
+.underline-pulse {
+  height: 4px;
+  border-radius: 6px;
+  animation: cap-underline-pulse 2.5s ease-in-out infinite alternate;
 }
 
 .app {

@@ -7,27 +7,20 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
+const unifiedAccent = '#1e40af';
 const recConfig = {
-  digital_infrastructure: {
-    icon: <WifiIcon fontSize="large" sx={{ color: '#00d9ff' }} />, color: '#00d9ff'
-  },
-  entrepreneurship: {
-    icon: <BusinessCenterIcon fontSize="large" sx={{ color: '#ec4899' }} />, color: '#ec4899'
-  },
-  housing_transportation: {
-    icon: <ApartmentIcon fontSize="large" sx={{ color: '#f59e0b' }} />, color: '#f59e0b'
-  },
-  workforce_development: {
-    icon: <GroupWorkIcon fontSize="large" sx={{ color: '#8b5cf6' }} />, color: '#8b5cf6'
-  }
+  digital_infrastructure: { icon: <WifiIcon fontSize="large" sx={{ color: unifiedAccent }} />, color: unifiedAccent },
+  entrepreneurship: { icon: <BusinessCenterIcon fontSize="large" sx={{ color: unifiedAccent }} />, color: unifiedAccent },
+  housing_transportation: { icon: <ApartmentIcon fontSize="large" sx={{ color: unifiedAccent }} />, color: unifiedAccent },
+  workforce_development: { icon: <GroupWorkIcon fontSize="large" sx={{ color: unifiedAccent }} />, color: unifiedAccent },
 };
 
 const gridVariants = {
   visible: { transition: { staggerChildren: 0.13 } }
 };
 const cardVariants = {
-  hidden: { opacity: 0, scale: 0.96, y: 20 },
-  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.52, type: 'spring', bounce: 0.29 } }
+  hidden: { opacity: 0, x: 24 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.52, type: 'spring', bounce: 0.2 } }
 };
 
 function RecChip({ label, color }) {
@@ -50,7 +43,7 @@ function InterventionRecommendations({ pillars }) {
       ],
       impact: 'Could improve IGS by 8-12 pts',
       timeline: '12-18 months',
-      cost: '$$'
+      
     },
     {
       pillar: 'entrepreneurship',
@@ -65,7 +58,7 @@ function InterventionRecommendations({ pillars }) {
       ],
       impact: 'Could improve IGS by 5-8 pts, 15-20 new businesses',
       timeline: '9-12 months',
-      cost: '$$'
+      
     },
     {
       pillar: 'housing_transportation',
@@ -80,7 +73,7 @@ function InterventionRecommendations({ pillars }) {
       ],
       impact: 'Could improve IGS by 6-10 pts, reduce burden',
       timeline: '18-24 months',
-      cost: '$$$'
+      
     },
     {
       pillar: 'workforce_development',
@@ -95,7 +88,7 @@ function InterventionRecommendations({ pillars }) {
       ],
       impact: 'Could improve IGS by 4-7 pts',
       timeline: '12-15 months',
-      cost: '$$'
+      
     }
   ];
   const filtered = recommendations.filter(r => typeof r.gap === 'number' && Math.abs(r.gap) > 5);
@@ -111,11 +104,12 @@ function InterventionRecommendations({ pillars }) {
             component={motion.div} variants={cardVariants}
             elevation={5} key={rec.title}
             sx={{
-              borderRadius: 4,
+              borderRadius: '20px',
               py: 3, px: 3,
               background: theme.palette.background.paper,
               boxShadow: theme.palette.mode === 'dark' ? '0 8px 26px #022e' : '0 2px 12px #bcbcbcff',
               minWidth: 215,
+              minHeight: 260,
               display: 'flex', flexDirection: 'column',
               gap: 1.3,
               position: 'relative', overflow: 'visible', mb: 2
@@ -148,7 +142,6 @@ function InterventionRecommendations({ pillars }) {
             <Stack direction="row" spacing={2} sx={{ mt: 1.6, flexWrap: 'wrap' }}>
               <RecChip label={rec.impact} color={recTheme.color} />
               <RecChip label={rec.timeline} color={theme.palette.secondary.main} />
-              <RecChip label={rec.cost} color={theme.palette.chartBlue || theme.palette.primary.main} />
             </Stack>
           </Paper>
         );

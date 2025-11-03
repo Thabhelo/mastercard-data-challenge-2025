@@ -108,7 +108,7 @@ function PredictionCard({ tractId, tractName, mode = 'whatif', yearsAhead = 5, t
 
   return (
     <Paper component={motion.div} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
-      sx={{ borderRadius: 5, p: 4, maxWidth: 560, mx: 'auto', background: theme.palette.background.paper, boxShadow: theme.palette.mode === 'dark' ? '0 6px 32px #031a' : '0 1.5px 12px #2354', mt: 6 }}>
+      sx={{ borderRadius: '20px', p: 4, width: '100%', background: theme.palette.background.paper, boxShadow: theme.palette.mode === 'dark' ? '0 6px 32px #031a' : '0 1.5px 12px #2354', mt: 2, minHeight: 420 }}>
       <Typography
         variant="h3"
         fontWeight={700}

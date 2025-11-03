@@ -27,8 +27,8 @@ const palette = {
     chartPurple: '#a855f7'
   },
   light: {
-    background: '#ffffff',
-    paper: '#f7f8fa',
+    background: '#f2f2f2',
+    paper: '#ffffff',
     accent: '#1e40af',
     accent2: '#8b5cf6',
     accent3: '#ea4eaa',
@@ -60,12 +60,12 @@ const dashboardTheme = mode => createTheme({
   },
   typography: {
     fontFamily: ['Inter', 'Roboto', 'Arial', 'sans-serif'].join(','),
-    h1: { fontWeight: 700, fontSize: '2.8rem', letterSpacing: '-0.03em' },
-    h2: { fontWeight: 700, fontSize: '2rem', letterSpacing: '-0.02em' },
-    h3: { fontWeight: 600, fontSize: '1.3rem' },
+    h1: { fontWeight: 500, fontSize: '2.5rem', letterSpacing: 0 },
+    h2: { fontWeight: 500, fontSize: '2rem', letterSpacing: 0 },
+    h3: { fontWeight: 500, fontSize: '1.25rem', letterSpacing: 0 },
     body1: { fontSize: '1.05rem' }
   },
-  shape: { borderRadius: 16 }
+  shape: { borderRadius: 20 }
 });
 
 const Root = styled('div')(({ theme }) => ({
@@ -199,8 +199,8 @@ function App() {
               height: 4,
               borderRadius: 5.5,
               background: theme.palette.mode === 'dark'
-                ? 'linear-gradient(90deg, #00d9ff 0%, #8b5cf6 78%)'
-                : 'linear-gradient(90deg, #1e40af 0%, #8b5cf6 78%)',
+                ? 'linear-gradient(90deg, #00d9ff 0%, #1e90ff 78%)'
+                : 'linear-gradient(90deg, #1e40af 0%, #00d9ff 78%)',
               mx: 'auto', mt: 1.1,
               animation: 'header-acc-underline 2.5s ease-in-out infinite alternate',
               '@keyframes header-acc-underline': {
