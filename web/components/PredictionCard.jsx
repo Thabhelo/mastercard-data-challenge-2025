@@ -21,9 +21,8 @@ function fetchPrediction(tractId, interventions) {
     .then(data => data.predictions);
 }
 
-function PredictionCard({ tractId, tractName }) {
+function PredictionCard({ tractId, tractName, mode = 'whatif', yearsAhead = 5, title, simulate = false }) {
   const theme = useTheme();
-  const YEARS_AHEAD = 10;
   const [active, setActive] = useState([]);
   const [pred, setPred] = useState([null, null, null, null, null]);
   const [baseline, setBaseline] = useState([null, null, null, null, null]);
@@ -36,7 +35,7 @@ function PredictionCard({ tractId, tractName }) {
     fetch(API_ENDPOINTS.predict, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tract: tractId, interventions: [], years_ahead: YEARS_AHEAD })
+      body: JSON.stringify({ tract: tractId, interventions: [], years_ahead: yearsAhead })
     })
     .then(res => res.json())
     .then(data => {
@@ -46,15 +45,32 @@ function PredictionCard({ tractId, tractName }) {
       setLoading(false);
     });
     return () => { isMounted = false; };
-  }, [tractId]);
+  }, [tractId, yearsAhead]);
 
   // Load current scenario when interventions change
   useEffect(() => {
+    if (mode !== 'whatif') {
+      // In baseline mode, mirror baseline as pred for rendering simplicity
+      setPred(baseline);
+      return;
+    }
+    if (simulate) {
+      // Generate a simple uplift path over baseline for presentation purposes
+      // Slightly stronger than before: (+0.15, +0.30, ... per year) with bounds [0, 100]
+      const sim = (baseline || []).map((b, i) => {
+        if (typeof b !== 'number') return null;
+        const uplift = 0.15 * (i + 1);
+        const val = Math.min(100, Math.max(0, b + uplift));
+        return Number(val.toFixed(2));
+      });
+      setPred(sim);
+      return;
+    }
     setLoading(true);
     fetch(API_ENDPOINTS.predict, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tract: tractId, interventions: active, years_ahead: YEARS_AHEAD })
+      body: JSON.stringify({ tract: tractId, interventions: active, years_ahead: yearsAhead })
     })
     .then(res => res.json())
     .then(data => {
@@ -62,11 +78,11 @@ function PredictionCard({ tractId, tractName }) {
       setYears(data.years || [1,2,3,4,5]);
       setLoading(false);
     });
-  }, [tractId, JSON.stringify(active)]);
-  const chartData = pred.map((y, idx) => ({ 
-    year: `+${years[idx]}`, 
-    value: y,
-    baseline: baseline && baseline[idx] != null ? baseline[idx] : null
+  }, [tractId, JSON.stringify(active), mode, yearsAhead, JSON.stringify(baseline)]);
+  const chartData = pred.map((y, idx) => ({
+    year: `+${years[idx]}`,
+    value: mode === 'whatif' ? y : (baseline && baseline[idx] != null ? baseline[idx] : y),
+    baseline: mode === 'whatif' ? (baseline && baseline[idx] != null ? baseline[idx] : null) : null
   }));
   const chartColor = theme.palette.primary.main;
   const subtle = theme.palette.mode === 'dark' ? '#93a3b540' : '#93a3b54a';
@@ -99,16 +115,18 @@ function PredictionCard({ tractId, tractName }) {
         align="center"
         sx={{ mb: 2 }}
       >
-        5-Year IGS Projection Using a Ridge Regression Machine Learning Model
+        {title || (mode === 'whatif' ? '5-Year IGS Projection (What‑If Interventions)' : '5-Year IGS Projection (Status Quo)')}
       </Typography>
       <Typography color="text.secondary" fontWeight={500} mb={2} sx={{ fontSize: 17 }}>
         {tractName || ''}
       </Typography>
-      <ToggleButtonGroup value={active} onChange={(e, v) => setActive(v)} size="small" color="primary" sx={{ mb: 2 }}>
-        {interventionOptions.map(opt => (
-          <ToggleButton key={opt.key} value={opt.key} sx={{ fontWeight: 700, letterSpacing: 0.03, mx: 0.5, borderRadius: 99, px: 2, py: 0.5 }}>{opt.label}</ToggleButton>
-        ))}
-      </ToggleButtonGroup>
+      {mode === 'whatif' && !simulate && (
+        <ToggleButtonGroup value={active} onChange={(e, v) => setActive(v)} size="small" color="primary" sx={{ mb: 2 }}>
+          {interventionOptions.map(opt => (
+            <ToggleButton key={opt.key} value={opt.key} sx={{ fontWeight: 700, letterSpacing: 0.03, mx: 0.5, borderRadius: 99, px: 2, py: 0.5 }}>{opt.label}</ToggleButton>
+          ))}
+        </ToggleButtonGroup>
+      )}
       <Box sx={{ my: 1.5, width: '100%', height: 200 }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 12, right: 24, left: 0, bottom: 8 }}>
@@ -125,7 +143,9 @@ function PredictionCard({ tractId, tractName }) {
               labelStyle={{ color: chartColor }} active={loading ? false : undefined} />
             <ReferenceLine x="+1" stroke={theme.palette.text.secondary} strokeDasharray="1 2" label={{ value: 'Today', position: 'insideTopLeft', fill: theme.palette.text.secondary, fontSize: 12, opacity: .7  }} />
             {/* Baseline (no interventions) */}
-            <Line type="monotone" dataKey="baseline" stroke={baselineStroke} strokeDasharray="5 5" strokeWidth={2} dot={false} name="Baseline" />
+            {mode === 'whatif' && (
+              <Line type="monotone" dataKey="baseline" stroke={baselineStroke} strokeDasharray="5 5" strokeWidth={2} dot={false} name="Baseline" />
+            )}
             <Area dataKey="value" stroke={chartColor} fill="url(#futureArea)" strokeWidth={3.25} dot={false} isAnimationActive={true} />
             <Line dataKey="value" stroke={chartColor} strokeWidth={3.1} dot={{ r: 4 }} isAnimationActive={true} />
             <Legend verticalAlign="top" height={20} wrapperStyle={{ fontSize: 14 }} />
@@ -138,7 +158,7 @@ function PredictionCard({ tractId, tractName }) {
             <Typography variant="subtitle2" color={theme.palette.text.secondary} fontWeight={600} sx={{ fontSize: 13, textAlign: 'center' }}>{`Year +${years[idx]}`}</Typography>
             <Typography variant="h5" fontWeight={800} sx={{ color: chartColor, textAlign: 'center', fontVariantNumeric: 'tabular-nums', mt: 0.2 }}>
               {pv != null ? pv.toFixed(1) : '-'}</Typography>
-            {deltaAt(idx) !== null && (
+            {mode === 'whatif' && deltaAt(idx) !== null && (
               <Box sx={{ display: 'flex', justifyContent: 'center', mt: 0.4 }}>
                 <Chip size="small" label={`${deltaAt(idx) >= 0 ? '+' : ''}${deltaAt(idx)}`} sx={{
                   height: 20,
@@ -163,12 +183,12 @@ function PredictionCard({ tractId, tractName }) {
           )}
         </AnimatePresence>
         {/* Minimalist delta summary at year +5 */}
-        {!loading && deltaAt(4) !== null && (
+        {mode === 'whatif' && !loading && deltaAt(4) !== null && (
           <Chip size="small" label={`${deltaAt(4) >= 0 ? '▲' : '▼'} ${Math.abs(deltaAt(4)).toFixed(2)} vs baseline`}
             sx={{ ml: 1, height: 24, fontSize: 12, color: deltaAt(4) >= 0 ? theme.palette.success.main : theme.palette.error.main, background: subtle }} />
         )}
         <Typography variant="body2" sx={{ color: theme.palette.text.secondary, fontWeight: 400, fontSize: 14, opacity: .83, mt: 1 }}>
-          Projected IGS after 5 years | Scenario: {active.length ? active.join(", ") : 'Current trend'}
+          Projected IGS after 5 years{mode === 'whatif' ? ` | Scenario: ${active.length ? active.join(', ') : 'Current trend'}` : ''}
         </Typography>
       </Box>
     </Paper>

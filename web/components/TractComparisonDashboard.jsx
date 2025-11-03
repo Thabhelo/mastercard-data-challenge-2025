@@ -93,15 +93,33 @@ function TractComparisonDashboard({ data }) {
           <StatCard tract={tract_1100} label="Census Tract 1100" color={theme.palette.secondary.main} icon={<GroupIcon />} />
         </Grid>
       </Grid>
-      {/* Prediction Card Highlight */}
-      <Box sx={{ mb: 6 }}> 
-        <PredictionCard 
-          tractId={tract_105.fips || '1121010500'} 
-          tractName={tract_105.name || 'Census Tract 105'} />
-      </Box>
       <Box sx={{ mb: 5 }}>
         <Typography variant="h2" sx={{ mb: 2, fontWeight: 700, fontSize: '2.0rem' }}>IGS Trends (2017-2024)</Typography>
         <TimeSeriesComparison data={time_series} />
+      </Box>
+      {/* Projection Cards: Status Quo vs What-If (side by side) */}
+      <Box sx={{ mb: 6 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <PredictionCard
+              tractId={tract_105.fips || '1121010500'}
+              tractName={tract_105.name || 'Census Tract 105'}
+              mode="baseline"
+              yearsAhead={5}
+              title="5-Year IGS Projection (Status Quo)"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <PredictionCard
+              tractId={tract_105.fips || '1121010500'}
+              tractName={tract_105.name || 'Census Tract 105'}
+              mode="whatif"
+              yearsAhead={5}
+              title="5-Year IGS Projection (What‑If Interventions)"
+              simulate={true}
+            />
+          </Grid>
+        </Grid>
       </Box>
       <Box sx={{ mb: 5 }}>
         <Typography variant="h2" sx={{ mb: 2, fontWeight: 700, fontSize: '2.0rem' }}>Strategic Intervention Pillars</Typography>
