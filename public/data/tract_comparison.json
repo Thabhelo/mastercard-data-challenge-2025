@@ -1,0 +1,143 @@
+{
+  "tract_105": {
+    "fips": "1121010500",
+    "name": "Census Tract 105",
+    "igs": {
+      "mean": 24.0,
+      "min": 21.0,
+      "max": 28.0,
+      "latest": 23.0,
+      "trend": "increasing"
+    },
+    "growth": {
+      "mean": 27.75,
+      "min": 21.0,
+      "max": 40.0,
+      "latest": 23.0,
+      "trend": "increasing"
+    },
+    "inclusion": {
+      "mean": 20.375,
+      "min": 16.0,
+      "max": 23.0,
+      "latest": 23.0,
+      "trend": "increasing"
+    },
+    "gini_coefficient": {
+      "mean": null,
+      "min": null,
+      "max": null,
+      "latest": null,
+      "trend": null
+    },
+    "is_opportunity_zone": null
+  },
+  "tract_1100": {
+    "fips": "1121011100",
+    "name": "Census Tract 1100",
+    "igs": {
+      "mean": 47.625,
+      "min": 40.0,
+      "max": 56.0,
+      "latest": 50.0,
+      "trend": "increasing"
+    },
+    "growth": {
+      "mean": 48.875,
+      "min": 34.0,
+      "max": 59.0,
+      "latest": 59.0,
+      "trend": "increasing"
+    },
+    "inclusion": {
+      "mean": 46.0,
+      "min": 41.0,
+      "max": 55.0,
+      "latest": 41.0,
+      "trend": "decreasing"
+    },
+    "gini_coefficient": {
+      "mean": null,
+      "min": null,
+      "max": null,
+      "latest": null,
+      "trend": null
+    },
+    "is_opportunity_zone": null
+  },
+  "strategic_pillars": {
+    "digital_infrastructure": {
+      "metrics": {
+        "Internet Access Score": 50.0
+      },
+      "description": "Digital connectivity and broadband access"
+    },
+    "workforce_development": {
+      "metrics": {
+        "Labor Market Engagement Index Score": 6.799999999999997,
+        "New Businesses Score": 15.0
+      },
+      "description": "Employment opportunities and business creation"
+    },
+    "entrepreneurship": {
+      "metrics": {
+        "Minority/Women Owned Businesses Score": 32.0,
+        "Small Business Loans Score": 0.0
+      },
+      "description": "Small business support and ownership diversity"
+    },
+    "housing_transportation": {
+      "metrics": {
+        "Affordable Housing Score": 33.0,
+        "Travel Time to Work Score": null
+      },
+      "description": "Housing affordability and mobility"
+    },
+    "health_wellbeing": {
+      "metrics": {
+        "Health Insurance Coverage Score": null
+      },
+      "description": "Health access and outcomes"
+    },
+    "policy_income": {
+      "metrics": {
+        "Personal Income Score": null,
+        "Gini Coefficient Score": null,
+        "Female Above Poverty Score": null
+      },
+      "description": "Income equality and poverty reduction"
+    }
+  },
+  "time_series": {
+    "years": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "tract_105_igs": [
+      22,
+      22,
+      26,
+      21,
+      28,
+      27,
+      23,
+      23
+    ],
+    "tract_1100_igs": [
+      43,
+      50,
+      40,
+      42,
+      50,
+      56,
+      50,
+      50
+    ]
+  }
+}

@@ -11,18 +11,18 @@ import sys
 from http.server import BaseHTTPRequestHandler
 from typing import Dict, Any, List, Optional
 
-# Add frontend/src to path for imports
+# Add root src (Python ML) to path for imports
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FRONTEND_SRC = os.path.join(REPO_ROOT, 'frontend', 'src')
-if FRONTEND_SRC not in sys.path:
-    sys.path.insert(0, FRONTEND_SRC)
+PY_SRC = os.path.join(REPO_ROOT, 'src')
+if PY_SRC not in sys.path:
+    sys.path.insert(0, PY_SRC)
 
 try:
     from analysis.predict_future_igs import IGSPredictor  # type: ignore
 except ImportError as e:
     print(f"Import error: {e}")
     print(f"REPO_ROOT: {REPO_ROOT}")
-    print(f"FRONTEND_SRC: {FRONTEND_SRC}")
+    print(f"PY_SRC: {PY_SRC}")
     print(f"sys.path head: {sys.path[:5]}")
     raise
 
