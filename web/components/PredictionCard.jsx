@@ -23,6 +23,7 @@ function fetchPrediction(tractId, interventions) {
 
 function PredictionCard({ tractId, tractName }) {
   const theme = useTheme();
+  const YEARS_AHEAD = 10;
   const [active, setActive] = useState([]);
   const [pred, setPred] = useState([null, null, null, null, null]);
   const [baseline, setBaseline] = useState([null, null, null, null, null]);
@@ -35,7 +36,7 @@ function PredictionCard({ tractId, tractName }) {
     fetch(API_ENDPOINTS.predict, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tract: tractId, interventions: [] })
+      body: JSON.stringify({ tract: tractId, interventions: [], years_ahead: YEARS_AHEAD })
     })
     .then(res => res.json())
     .then(data => {
@@ -53,7 +54,7 @@ function PredictionCard({ tractId, tractName }) {
     fetch(API_ENDPOINTS.predict, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tract: tractId, interventions: active })
+      body: JSON.stringify({ tract: tractId, interventions: active, years_ahead: YEARS_AHEAD })
     })
     .then(res => res.json())
     .then(data => {
@@ -76,6 +77,18 @@ function PredictionCard({ tractId, tractName }) {
     const d = Number((pred[i] - baseline[i]).toFixed(2));
     return d === 0 ? 0 : d;
   };
+
+  // Compute a tight y-domain based on baseline and scenario with small padding
+  const yDomain = React.useMemo(() => {
+    const values = [];
+    pred.forEach(v => { if (typeof v === 'number') values.push(v); });
+    baseline.forEach(v => { if (typeof v === 'number') values.push(v); });
+    if (values.length === 0) return ['auto', 'auto'];
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const pad = Math.max(1, (max - min) * 0.08); // at least 1 pt padding
+    return [Math.max(0, Math.floor((min - pad) * 10) / 10), Math.min(100, Math.ceil((max + pad) * 10) / 10)];
+  }, [JSON.stringify(pred), JSON.stringify(baseline)]);
 
   return (
     <Paper component={motion.div} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
@@ -107,7 +120,7 @@ function PredictionCard({ tractId, tractName }) {
             </defs>
             <CartesianGrid strokeDasharray="3 4" stroke={theme.palette.divider} opacity={0.27}/>
             <XAxis dataKey="year" stroke={theme.palette.text.secondary} fontSize={13}/>
-            <YAxis stroke={theme.palette.text.secondary} fontSize={13} width={34} domain={['auto','auto']}/>
+            <YAxis stroke={theme.palette.text.secondary} fontSize={13} width={34} domain={yDomain}/>
             <Tooltip contentStyle={{ background: theme.palette.background.paper+'e6', borderRadius: 12, color: theme.palette.text.primary }}
               labelStyle={{ color: chartColor }} active={loading ? false : undefined} />
             <ReferenceLine x="+1" stroke={theme.palette.text.secondary} strokeDasharray="1 2" label={{ value: 'Today', position: 'insideTopLeft', fill: theme.palette.text.secondary, fontSize: 12, opacity: .7  }} />
