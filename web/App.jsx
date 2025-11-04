@@ -1,11 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Switch from '@mui/material/Switch';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 import TractComparisonDashboard from './components/TractComparisonDashboard';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -108,16 +104,7 @@ const HeaderGlow = styled('div')(({ theme }) => ({
   zIndex: 0
 }));
 
-const ThemeSwitchBox = styled(Box)(({ theme }) => ({
-  position: 'fixed',
-  top: 24,
-  right: 36,
-  zIndex: 1200,
-  background: theme.palette.background.paper,
-  borderRadius: 22,
-  padding: '5px 8px',
-  boxShadow: theme.palette.mode === 'dark' ? palette.dark.shadow : palette.light.shadow
-}));
+// Dark theme removed; light-only UI
 
 const Footer = styled(Paper)(({ theme }) => ({
   marginTop: 'auto',
@@ -147,8 +134,7 @@ const Divider = styled('div')(({ theme }) => ({
 }));
 
 function App() {
-  const [mode, setMode] = useState('light'); // light as default
-  const theme = useMemo(() => dashboardTheme(mode), [mode]);
+  const theme = useMemo(() => dashboardTheme('light'), []);
   const [comparisonData, setComparisonData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
@@ -173,17 +159,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Root>
-        <ThemeSwitchBox>
-          <IconButton color="inherit" onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}>
-            {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
-          <Switch
-            checked={mode === 'dark'}
-            onChange={e => setMode(e.target.checked ? 'dark' : 'light')}
-            color="primary"
-            inputProps={{ 'aria-label': 'Toggle theme' }}
-          />
-        </ThemeSwitchBox>
+        {/* Theme toggle removed (light-only) */}
         <Header>
           <HeaderGlow />
           <Typography variant="h1" component="div" sx={{
