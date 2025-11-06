@@ -115,7 +115,7 @@ function PredictionCard({ tractId, tractName, mode = 'whatif', yearsAhead = 5, t
         align="center"
         sx={{ mb: 2 }}
       >
-        {title || (mode === 'whatif' ? '5-Year IGS Projection (What‑If Interventions)' : '5-Year IGS Projection (Status Quo)')}
+        {title || (mode === 'whatif' ? '5-Year IGS Projection (With our suggested interventions)' : '5-Year IGS Projection (Status Quo)')}
       </Typography>
       <Typography color="text.secondary" fontWeight={500} mb={2} sx={{ fontSize: 17 }}>
         {tractName || ''}
