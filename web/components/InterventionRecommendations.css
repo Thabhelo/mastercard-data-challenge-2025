@@ -12,12 +12,13 @@
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
+  /* box-shadow: var(--shadow); */
   padding: var(--gap-lg) var(--gap-xl);
   color: var(--text-main);
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
+  background: black;
 }
 .recommendation-header {
   display: flex;
@@ -80,4 +81,3 @@
   color: var(--viz-yellow1);
   font-weight: 500;
 }
-

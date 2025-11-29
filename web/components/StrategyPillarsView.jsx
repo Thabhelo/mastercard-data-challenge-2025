@@ -1,59 +1,67 @@
-import React, { useMemo } from 'react';
-import { Box, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
-import WifiIcon from '@mui/icons-material/Wifi';
-import BuildIcon from '@mui/icons-material/Build';
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import PaidIcon from '@mui/icons-material/Paid';
+import React, { useMemo } from "react";
+import { Box, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+import WifiIcon from "@mui/icons-material/Wifi";
+import BuildIcon from "@mui/icons-material/Build";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
+import PaidIcon from "@mui/icons-material/Paid";
+import { palette } from "../utils/theme.jsx";
 
-const unifiedAccent = '#1e40af';
+// const unifiedAccent = "#1e40af";
+const unifiedAccent = palette.dark.tract2;
 const pillarConfig = {
   digital_infrastructure: {
-    title: 'Digital Infrastructure',
+    title: "Digital Infrastructure",
     icon: <WifiIcon fontSize="large" sx={{ color: unifiedAccent }} />,
     accent: unifiedAccent,
   },
   workforce_development: {
-    title: 'Workforce Development',
+    title: "Workforce Development",
     icon: <BuildIcon fontSize="large" sx={{ color: unifiedAccent }} />,
     accent: unifiedAccent,
   },
   entrepreneurship: {
-    title: 'Entrepreneurship',
+    title: "Entrepreneurship",
     icon: <BusinessCenterIcon fontSize="large" sx={{ color: unifiedAccent }} />,
     accent: unifiedAccent,
   },
   housing_transportation: {
-    title: 'Housing & Transportation',
+    title: "Housing & Transportation",
     icon: <ApartmentIcon fontSize="large" sx={{ color: unifiedAccent }} />,
     accent: unifiedAccent,
   },
   health_wellbeing: {
-    title: 'Health & Wellbeing',
-    icon: <HealthAndSafetyIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    title: "Health & Wellbeing",
+    icon: (
+      <HealthAndSafetyIcon fontSize="large" sx={{ color: unifiedAccent }} />
+    ),
     accent: unifiedAccent,
   },
   policy_income: {
-    title: 'Policy & Income',
+    title: "Policy & Income",
     icon: <PaidIcon fontSize="large" sx={{ color: unifiedAccent }} />,
     accent: unifiedAccent,
-  }
+  },
 };
 
 const variants = {
   card: {
     hidden: { opacity: 0, y: 22 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.54, type: 'spring', bounce: 0.31 } }
-  }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.54, type: "spring", bounce: 0.31 },
+    },
+  },
 };
 
 const GapBar = ({ value, color }) => (
   <motion.div
     initial={{ width: 0 }}
     animate={{ width: `${Math.min(Math.abs(value), 100)}%` }}
-    transition={{ duration: 1.1, type: 'spring', bounce: 0.1 }}
+    transition={{ duration: 1.1, type: "spring", bounce: 0.1 }}
     style={{
       background: color,
       borderRadius: 14,
@@ -61,8 +69,8 @@ const GapBar = ({ value, color }) => (
       minWidth: 8,
       marginLeft: 5,
       marginRight: 8,
-      display: 'inline-block',
-      verticalAlign: 'middle'
+      display: "inline-block",
+      verticalAlign: "middle",
     }}
   />
 );
@@ -70,13 +78,14 @@ const GapBar = ({ value, color }) => (
 // Priority badges removed per request
 
 function StrategyPillarsView({ pillars }) {
-
   const items = useMemo(() => {
     return Object.entries(pillars)
       .map(([key, pillar]) => {
         const config = pillarConfig[key];
         if (!config) return null;
-        const realMetrics = Object.entries(pillar.metrics).filter(([, val]) => val !== null && val !== undefined);
+        const realMetrics = Object.entries(pillar.metrics).filter(
+          ([, val]) => val !== null && val !== undefined
+        );
         if (realMetrics.length === 0) return null;
         const card = (
           <Box
@@ -84,33 +93,78 @@ function StrategyPillarsView({ pillars }) {
             key={key}
             variants={variants.card}
             sx={{
-              background: t => t.palette.background.paper,
-              borderRadius: '20px',
-              boxShadow: t => t.palette.mode === 'dark' ? '0 6px 22px #000A, 0 1.5px 7px #1113' : '0 2px 8px #2e355811',
+              background: "#202124",
+              borderRadius: "10px",
               p: 3,
               minHeight: 240,
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
               gap: 1.7,
-            }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 0.7 }}>
+              border: `0.05px solid #888383a9`,
+              minHeight: 280,
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                mb: 0.7,
+              }}
+            >
               {config.icon}
-              <Typography variant="h3" fontWeight={700} fontSize={19} sx={{ ml: 0.7 }}>{config.title}</Typography>
+              <Typography
+                variant="h3"
+                fontWeight={700}
+                fontSize={19}
+                sx={{ ml: 0.7 }}
+              >
+                {config.title}
+              </Typography>
             </Box>
-            <Typography variant="body2" color="text.secondary" fontWeight={500} sx={{ mb: 1 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              fontWeight={500}
+              sx={{ mb: 1 }}
+            >
               {pillar.description}
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.3 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.3 }}>
               {realMetrics.map(([name, gap]) => (
-                <Box key={name} sx={{ display: 'flex', alignItems: 'center', gap: 1.3, mt: 0.2 }}>
-                  <Typography sx={{ color: config.accent, fontWeight: 600, fontSize: 16, minWidth: 56 }}>{name}</Typography>
-                  <GapBar value={gap} color={config.accent} />
+                <Box
+                  key={name}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.3,
+                    mt: 0.2,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "#ddddddff",
+                      fontWeight: 600,
+                      fontSize: 14,
+                      minWidth: 56,
+                    }}
+                  >
+                    {name}
+                  </Typography>
+                  <GapBar value={gap} color={palette.dark.tract1} />
                   <motion.span
                     initial={{ opacity: 0, x: 15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.53, type: 'spring', bounce: 0.39 }}
-                    style={{ fontWeight: 700, color: gap > 0 ? config.accent : '#ef4444', fontSize: 15, letterSpacing: '0.013em' }}>
-                    {gap > 0 ? '+' : ''}{gap.toFixed(1)}
+                    transition={{ delay: 0.53, type: "spring", bounce: 0.39 }}
+                    style={{
+                      fontWeight: 700,
+                      color: gap > 0 ? "white" : "#ef4444",
+                      fontSize: 15,
+                      letterSpacing: "0.013em",
+                    }}
+                  >
+                    {gap > 0 ? "+" : ""}
+                    {gap.toFixed(1)}
                   </motion.span>
                 </Box>
               ))}
@@ -126,7 +180,14 @@ function StrategyPillarsView({ pillars }) {
   if (!items.length) return null;
 
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(4, 1fr)' }, gap: 7.5, width: '100%' }}>
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: { xs: "1fr", md: "repeat(4, 1fr)" },
+        gap: 7.5,
+        width: "100%",
+      }}
+    >
       {items.map(({ key, card }) => (
         <Box key={key}>{card}</Box>
       ))}
@@ -135,4 +196,3 @@ function StrategyPillarsView({ pillars }) {
 }
 
 export default StrategyPillarsView;
-

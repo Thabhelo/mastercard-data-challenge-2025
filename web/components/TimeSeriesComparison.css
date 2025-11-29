@@ -1,11 +1,11 @@
 .time-series-comparison {
-  background: var(--glass-bg);
-  border-radius: var(--radius-lg);
+  background-color: #202124;
   box-shadow: var(--shadow);
   padding: var(--gap-lg) var(--gap-xl);
   margin: 0 auto;
-  margin-top: var(--gap-xxl);
-  margin-bottom: calc(var(--gap-xxl) * 1.5);
+  padding: 30px 30px 20px 30px;
+  border-radius: 10px;
+  border: 0.05px solid #888383a9;
   min-width: 320px;
 }
 
@@ -20,7 +20,8 @@
 
 .recharts-cartesian-axis-tick-value,
 .recharts-cartesian-axis-label {
-  fill: var(--text-tertiary) !important;
+  /* fill: var(--text-tertiary) !important; */
+  fill: #bbbfbc !important;
 }
 
 .recharts-tooltip-wrapper .recharts-default-tooltip {
@@ -157,7 +158,7 @@
   position: absolute;
   transform: translateX(-50%);
   font-size: 0.75rem;
-  color: #64748b;
+  color: #ffffff;
   margin-top: 0.5rem;
 }
 
@@ -237,4 +238,3 @@
 .close-tooltip:hover {
   background: #b91c1c;
 }
-

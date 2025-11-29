@@ -29,7 +29,7 @@
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  border-radius: var(--radius-lg);
+  /* border-radius: var(--radius-lg); */
   box-shadow: var(--shadow);
   padding: var(--gap-xl) var(--gap-lg);
   min-width: 240px;
@@ -97,7 +97,7 @@
   font-size: 0.98rem;
   font-weight: 500;
   padding: var(--gap-xs) var(--gap-md);
-  border-radius: var(--radius-md);
+  /* border-radius: var(--radius-md); */
   position: absolute;
   bottom: var(--gap-xl);
   left: var(--gap-md);
@@ -109,7 +109,7 @@
   font-size: 0.98rem;
   font-weight: 500;
   padding: var(--gap-xs) var(--gap-md);
-  border-radius: var(--radius-md);
+  /* border-radius: var(--radius-md); */
   position: absolute;
   bottom: var(--gap-xl);
   left: var(--gap-md);
@@ -127,7 +127,7 @@
 
 .gap-indicator {
   background: var(--secondary-bg);
-  border-radius: var(--radius-lg);
+  /* border-radius: var(--radius-lg); */
   box-shadow: var(--shadow-low);
   padding: var(--gap-lg) var(--gap-md);
   width: 100%;
@@ -173,4 +173,3 @@
   letter-spacing: 0.01em;
   padding-left: 0.1em;
 }
-
