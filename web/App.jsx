@@ -3,16 +3,137 @@ import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import TractComparisonDashboard from "./components/TractComparisonDashboard";
+import InterventionSimulator from "./components/InterventionSimulator";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import { motion } from "framer-motion";
-import ThemeToggle from "./components/ThemeToggle";
-import {
-  dashboardTheme,
-  Header,
-  Divider,
-  Footer,
-  Root,
-} from "./utils/theme.jsx";
+
+// Modern SaaS color palette
+const colors = {
+  primary: "#3b82f6",
+  secondary: "#06b6d4",
+  emerald: "#10b981",
+  amber: "#f59e0b",
+  slate800: "#1e293b",
+  slate600: "#475569",
+  slate50: "#f8fafc",
+};
+
+const dashboardTheme = createTheme({
+  palette: {
+    mode: "light",
+    background: {
+      default: "#f8fafc",
+      paper: "#ffffff",
+    },
+    primary: { main: colors.primary },
+    secondary: { main: colors.secondary },
+    error: { main: "#ef4444" },
+    success: { main: colors.emerald },
+    warning: { main: colors.amber },
+    text: {
+      primary: colors.slate800,
+      secondary: colors.slate600,
+    },
+    divider: "#e2e8f0",
+  },
+  typography: {
+    fontFamily: [
+      "Inter",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "Segoe UI",
+      "Roboto",
+      "sans-serif",
+    ].join(","),
+    h1: { fontWeight: 800, fontSize: "2.5rem", letterSpacing: "-0.02em" },
+    h2: { fontWeight: 700, fontSize: "2rem", letterSpacing: "-0.01em" },
+    h3: { fontWeight: 600, fontSize: "1.25rem", letterSpacing: 0 },
+    body1: { fontSize: "1rem" },
+  },
+  shape: { borderRadius: 16 },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: "none",
+        },
+      },
+    },
+  },
+});
+
+const Root = styled("div")(() => ({
+  background: "linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)",
+  color: colors.slate800,
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "100vh",
+}));
+
+const Header = styled("header")(() => ({
+  minHeight: 140,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: "3rem 0 3.5rem 0",
+  borderRadius: "0 0 40px 40px",
+  marginBottom: 24,
+  background: "linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)",
+  boxShadow: "0 4px 30px rgba(0,0,0,0.05)",
+  position: "relative",
+  overflow: "hidden",
+  borderBottom: "1px solid #e2e8f0",
+}));
+
+const HeaderAccent = styled("div")(() => ({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  height: 4,
+  background: `linear-gradient(90deg, ${colors.primary} 0%, ${colors.secondary} 50%, ${colors.emerald} 100%)`,
+}));
+
+const Footer = styled(Paper)(() => ({
+  marginTop: "auto",
+  width: "100%",
+  background: "linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)",
+  color: colors.slate600,
+  borderRadius: "40px 40px 0 0",
+  boxShadow: "0 -4px 30px rgba(0,0,0,0.03)",
+  padding: "1.5rem 0",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "row",
+  gap: 24,
+  fontSize: "1rem",
+  fontWeight: 500,
+  borderTop: "1px solid #e2e8f0",
+}));
+
+const StyledTabs = styled(Tabs)(() => ({
+  marginBottom: 32,
+  "& .MuiTabs-indicator": {
+    backgroundColor: colors.primary,
+    height: 3,
+    borderRadius: 3,
+  },
+}));
+
+const StyledTab = styled(Tab)(() => ({
+  textTransform: "none",
+  fontWeight: 600,
+  fontSize: "1rem",
+  color: colors.slate600,
+  "&.Mui-selected": {
+    color: colors.primary,
+  },
+}));
 
 function App() {
   const [comparisonData, setComparisonData] = React.useState(null);
@@ -38,134 +159,95 @@ function App() {
     loadData();
   }, []);
 
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={dashboardTheme}>
       <CssBaseline />
       <Root>
-        {/* Theme Toggle */}
-        <Box
-          sx={{
-            position: "fixed",
-            top: 20,
-            right: 24,
-            zIndex: 1000,
-          }}
-        >
-          <ThemeToggle isDark={isDark} onToggle={() => setIsDark(!isDark)} />
-        </Box>
-
         <Header>
+          <HeaderAccent />
           <Typography
             variant="h1"
             component="div"
             sx={{
-              mb: 1,
+              mb: 1.5,
               fontWeight: 800,
-              letterSpacing: "-.025em",
-              fontSize: { xs: "2.05rem", sm: "2.7rem", md: "3.12rem" },
-              position: "relative",
-              zIndex: 1,
-              color: theme.palette.text.primary,
+              letterSpacing: "-0.02em",
+              fontSize: { xs: "1.8rem", sm: "2.3rem", md: "2.8rem" },
+              color: colors.slate800,
               textAlign: "center",
             }}
           >
             County Inequality Data Dashboard
-            <Box
-              sx={{
-                width: 800,
-                height: 2.5,
-                borderRadius: 10,
-                background: "#ff7f0e",
-                mx: "auto",
-                mt: 1.1,
-              }}
-            />
           </Typography>
-          <Typography
-            variant="h5"
+          <Box
             sx={{
-              fontWeight: 400,
-              color: theme.palette.text.secondary,
-              fontSize: { xs: "1.03rem", sm: "1.27rem" },
-              mb: 0.7,
-              letterSpacing: 0.01,
-              zIndex: 1,
+              width: 80,
+              height: 4,
+              borderRadius: 2,
+              background: `linear-gradient(90deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
+              mb: 2,
+            }}
+          />
+          <Typography
+            sx={{
+              fontWeight: 500,
+              color: colors.slate600,
+              fontSize: { xs: "1rem", sm: "1.15rem" },
               textAlign: "center",
             }}
           >
             Data-driven Insights for Economic Inclusion
           </Typography>
         </Header>
+
+        {/* Navigation Tabs */}
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <StyledTabs value={tabValue} onChange={handleTabChange}>
+            <StyledTab label="Dashboard" />
+            <StyledTab label="Intervention Simulator" />
+          </StyledTabs>
+        </Box>
+
         <main>
           {loading ? (
             <Box sx={{ display: "flex", justifyContent: "center", mt: 12 }}>
-              <div className="loading-spinner"></div>
+              <Box
+                sx={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: "50%",
+                  border: `4px solid ${colors.slate50}`,
+                  borderTopColor: colors.primary,
+                  animation: "spin 1s linear infinite",
+                  "@keyframes spin": {
+                    "0%": { transform: "rotate(0deg)" },
+                    "100%": { transform: "rotate(360deg)" },
+                  },
+                }}
+              />
             </Box>
           ) : error ? (
             <Box sx={{ textAlign: "center", mt: 10 }}>
-              <h2 style={{ color: theme.palette.error.main }}>
+              <Typography
+                sx={{ color: "#ef4444", fontWeight: 700, fontSize: 20, mb: 1 }}
+              >
                 Error loading data
-              </h2>
-              <p>{error}</p>
+              </Typography>
+              <Typography sx={{ color: colors.slate600 }}>{error}</Typography>
             </Box>
           ) : (
-            <TractComparisonDashboard data={comparisonData} />
+            <>
+              {tabValue === 0 && (
+                <TractComparisonDashboard data={comparisonData} />
+              )}
+              {tabValue === 1 && <InterventionSimulator />}
+            </>
           )}
         </main>
-        <Divider />
-        <Footer
-          component={motion.footer}
-          initial={{ opacity: 0, y: 38 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65 }}
-          elevation={8}
-        >
-          <span style={{ fontWeight: 700, color: theme.palette.text.primary }}>
-            County Inequality Data Dashboard
-          </span>
-          <span
-            style={{
-              fontWeight: 400,
-              color: theme.palette.primary.main,
-              margin: "0 14px 0 14px",
-            }}
-          >
-            Mastercard Data Challenge 2025
-          </span>
-          <span style={{ fontSize: "1.01em", opacity: 0.79 }}>
-            Built by Team Tornadoes |
-            <svg
-              style={{
-                height: 22,
-                verticalAlign: "middle",
-                marginLeft: 7,
-                marginRight: 2,
-              }}
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke={theme.palette.primary.main}
-                strokeWidth="2"
-              />
-              <path
-                d="M15 19.5V17a2 2 0 0 0-2-2h-3a2 2 0 1 0 0 4h7"
-                stroke={theme.palette.primary.main}
-                strokeWidth="1.5"
-              />
-              <circle
-                cx="12"
-                cy="8"
-                r="3.5"
-                stroke={theme.palette.primary.main}
-                strokeWidth="1.5"
-              />
-            </svg>
-          </span>
-        </Footer>
       </Root>
     </ThemeProvider>
   );
