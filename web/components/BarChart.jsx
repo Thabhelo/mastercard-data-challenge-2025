@@ -1,8 +1,11 @@
 import { useRef, useEffect } from "react";
+import { useTheme } from "@mui/material";
 import Chart from "chart.js/auto";
 import { palette } from "../utils/theme";
 
 export default function BarChart() {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -10,6 +13,9 @@ export default function BarChart() {
     if (chartRef.current) chartRef.current.destroy();
 
     const ctx = canvasRef.current.getContext("2d");
+
+    const textColor = isDark ? "#f5f5f5" : "#333333";
+    const gridColor = isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)";
 
     const data = {
       labels: [
@@ -31,7 +37,7 @@ export default function BarChart() {
         },
         {
           label: "Census Tract 1100",
-          data: [47.625, 50, 48.875, 59, 46, 41], // tweak to your actual means
+          data: [47.625, 50, 48.875, 59, 46, 41],
           backgroundColor: palette.dark.tract1,
           borderRadius: 4,
           barPercentage: 0.9,
@@ -47,7 +53,7 @@ export default function BarChart() {
         title: {
           display: true,
           text: "Mean and Latest Scores by Census Tract",
-          color: "#f5f5f5",
+          color: textColor,
           font: {
             size: 22,
             weight: "700",
@@ -60,7 +66,7 @@ export default function BarChart() {
         legend: {
           position: "top",
           labels: {
-            color: "#e5e5e5",
+            color: textColor,
             font: {
               size: 14,
               weight: "500",
@@ -75,7 +81,7 @@ export default function BarChart() {
             display: false,
           },
           ticks: {
-            color: "#f5f5f5",
+            color: textColor,
             font: {
               size: 13,
               weight: "500",
@@ -84,12 +90,12 @@ export default function BarChart() {
         },
         y: {
           beginAtZero: true,
-          suggestedMax: 50,
+          suggestedMax: 60,
           grid: {
-            color: "rgba(255,255,255,0.12)",
+            color: gridColor,
           },
           ticks: {
-            color: "#f5f5f5",
+            color: textColor,
             font: {
               size: 12,
             },
@@ -105,7 +111,7 @@ export default function BarChart() {
     });
 
     return () => chartRef.current?.destroy();
-  }, [palette]);
+  }, [isDark]);
 
   return (
     <div
@@ -113,9 +119,10 @@ export default function BarChart() {
         width: "100%",
         height: 380,
         padding: "1rem 2rem",
-        background: "#202124", // match your dark dashboard
+        background: isDark ? "#202124" : "#ffffff",
         borderRadius: "10px",
-        border: "0.05px solid #888383a9",
+        border: isDark ? "0.05px solid #888383a9" : "1px solid #e0e0e0",
+        boxShadow: isDark ? "none" : "0 2px 8px rgba(0,0,0,0.06)",
       }}
     >
       <canvas ref={canvasRef} />

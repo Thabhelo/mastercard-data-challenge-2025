@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import WifiIcon from "@mui/icons-material/Wifi";
 import BuildIcon from "@mui/icons-material/Build";
@@ -78,6 +78,9 @@ const GapBar = ({ value, color }) => (
 // Priority badges removed per request
 
 function StrategyPillarsView({ pillars }) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+  
   const items = useMemo(() => {
     return Object.entries(pillars)
       .map(([key, pillar]) => {
@@ -93,15 +96,15 @@ function StrategyPillarsView({ pillars }) {
             key={key}
             variants={variants.card}
             sx={{
-              background: "#202124",
+              background: isDark ? "#202124" : "#ffffff",
               borderRadius: "10px",
               p: 3,
-              minHeight: 240,
+              minHeight: 280,
               display: "flex",
               flexDirection: "column",
               gap: 1.7,
-              border: `0.05px solid #888383a9`,
-              minHeight: 280,
+              border: isDark ? "0.05px solid #888383a9" : "1px solid #e0e0e0",
+              boxShadow: isDark ? "none" : "0 2px 8px rgba(0,0,0,0.06)",
             }}
           >
             <Box
@@ -143,7 +146,7 @@ function StrategyPillarsView({ pillars }) {
                 >
                   <Typography
                     sx={{
-                      color: "#ddddddff",
+                      color: isDark ? "#ddddddff" : "#333333",
                       fontWeight: 600,
                       fontSize: 14,
                       minWidth: 56,
@@ -175,7 +178,7 @@ function StrategyPillarsView({ pillars }) {
       })
       .filter(Boolean)
       .slice(0, 4);
-  }, [pillars]);
+  }, [pillars, isDark]);
 
   if (!items.length) return null;
 

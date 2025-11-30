@@ -10,9 +10,11 @@ import { motion } from "framer-motion";
 import { palette } from "../utils/theme.jsx";
 import RadarChart from "./RadarChart";
 import BarChart from "./BarChart";
+import ClusterAnalysis from "./ClusterAnalysis";
 
 function TractComparisonDashboard({ data }) {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   const { tract_105, tract_1100, strategic_pillars, time_series } = data;
   const igsGap = tract_1100.igs.latest - tract_105.igs.latest;
 
@@ -58,9 +60,10 @@ function TractComparisonDashboard({ data }) {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        background: "#202124",
+        background: isDark ? "#202124" : "#ffffff",
         borderRadius: "10px",
-        border: `0.05px solid #888383a9`,
+        border: isDark ? "0.05px solid #888383a9" : "1px solid #e0e0e0",
+        boxShadow: isDark ? "none" : "0 2px 8px rgba(0,0,0,0.08)",
       }}
     >
       <Box
@@ -112,7 +115,7 @@ function TractComparisonDashboard({ data }) {
               <Typography
                 variant="body1"
                 fontWeight={500}
-                color={"#ffffff"}
+                color={isDark ? "#ffffff" : "#333333"}
                 sx={{ minWidth: 92 }}
               >
                 {stat.name}:
@@ -204,12 +207,15 @@ function TractComparisonDashboard({ data }) {
           />
         </Grid>
       </Grid>
+      <Box sx={{ mt: 6, mb: 4 }}>
+        <ClusterAnalysis />
+      </Box>
       <Box sx={{ mt: 6, mb: 6 }}>
         <TimeSeriesComparison data={time_series} />
       </Box>
-      <div style={{ fontSize: 30, fontWeight: 700, marginTop: "100px" }}>
+      <Typography variant="h2" sx={{ fontSize: 30, fontWeight: 700, mt: 12 }}>
         Radar Analysis
-      </div>
+      </Typography>
       <div
         style={{
           width: "100%",
@@ -248,9 +254,9 @@ function TractComparisonDashboard({ data }) {
       </Box>
 
       {/* Projection Cards: Status Quo vs What-If (side by side) */}
-      <div style={{ fontSize: 30, fontWeight: 700, marginTop: 50 }}>
-        Projects Based on Suggested Interventions
-      </div>
+      <Typography variant="h2" sx={{ fontSize: 30, fontWeight: 700, mt: 6 }}>
+        Projections Based on Suggested Interventions
+      </Typography>
       <Box sx={{ mb: 16 }}>
         <Grid container spacing={10}>
           <Grid item xs={12} md={6} sx={{ display: "flex" }}>

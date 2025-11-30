@@ -49,6 +49,7 @@ function PredictionCard({
   simulate = false,
 }) {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   const [active, setActive] = useState([]);
   const [pred, setPred] = useState([null, null, null, null, null]);
   const [baseline, setBaseline] = useState([null, null, null, null, null]);
@@ -174,8 +175,9 @@ function PredictionCard({
         borderRadius: "20px",
         p: 4,
         width: "100%",
-        background: "#1a1a2e",
-        border: `0.05px solid #888383a9`,
+        background: isDark ? "#1a1a2e" : "#ffffff",
+        border: isDark ? "0.05px solid #888383a9" : "1px solid #e0e0e0",
+        boxShadow: isDark ? "none" : "0 2px 12px rgba(0,0,0,0.08)",
         mt: 2,
         minHeight: 420,
       }}
