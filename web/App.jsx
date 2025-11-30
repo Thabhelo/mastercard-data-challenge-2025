@@ -22,8 +22,6 @@ function App() {
 
   const theme = useMemo(() => dashboardTheme(isDark ? "dark" : "light"), [isDark]);
 
-  const theme = useMemo(() => dashboardTheme("dark"), []);
-
   React.useEffect(() => {
     const loadData = async () => {
       try {
