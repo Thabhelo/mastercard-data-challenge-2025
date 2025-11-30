@@ -139,9 +139,7 @@ function App() {
   const [comparisonData, setComparisonData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
-  const [isDark, setIsDark] = useState(false); // Light mode default
-
-  const theme = useMemo(() => dashboardTheme(isDark ? "dark" : "light"), [isDark]);
+  const [tabValue, setTabValue] = useState(0);
 
   React.useEffect(() => {
     const loadData = async () => {
