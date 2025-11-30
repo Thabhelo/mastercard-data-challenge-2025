@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import TractComparisonDashboard from "./components/TractComparisonDashboard";
@@ -21,6 +22,8 @@ function App() {
   const [isDark, setIsDark] = useState(false); // Light mode default
 
   const theme = useMemo(() => dashboardTheme(isDark ? "dark" : "light"), [isDark]);
+
+  const theme = useMemo(() => dashboardTheme("dark"), []);
 
   React.useEffect(() => {
     const loadData = async () => {

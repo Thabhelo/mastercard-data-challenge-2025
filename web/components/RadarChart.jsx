@@ -6,6 +6,51 @@ import { palette } from "../utils/theme";
 export default function RadarChart() {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
+import Chart from "chart.js/auto";
+import { palette } from "../utils/theme";
+
+const data = {
+  labels: [
+    "Mean IGS",
+    "Current IGS",
+    "Max IGS",
+    "Min IGS",
+    "Mean Growth Score",
+    "Current Growth Score",
+    "Max Growth Score",
+    "Min Growth Score",
+    "Mean Inclusion Score",
+    "Current Inclusion Score",
+    "Max Inclusion Score",
+    "Min Inclusion Score",
+  ],
+  datasets: [
+    {
+      label: "Tract 1100",
+      data: [47.625, 50, 56, 40, 48.875, 59, 59, 34, 46, 41, 55, 41],
+      fill: true,
+      backgroundColor: palette.dark.tract1 + 22,
+      borderColor: palette.dark.tract1,
+      pointBackgroundColor: palette.dark.tract1,
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: palette.dark.tract1,
+    },
+    {
+      label: "Tract 105",
+      data: [24, 23, 28, 21, 27.75, 23, 40, 21, 20.375, 23, 23, 16],
+      fill: true,
+      backgroundColor: palette.dark.tract2 + "33",
+      borderColor: palette.dark.tract2,
+      pointBackgroundColor: palette.dark.tract2,
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: palette.dark.tract2,
+    },
+  ],
+};
+
+export default function RadarChart() {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
