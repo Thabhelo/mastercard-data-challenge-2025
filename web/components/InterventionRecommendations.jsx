@@ -78,6 +78,7 @@ function RecChip({ label, color }) {
 
 function InterventionRecommendations({ pillars }) {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   const recommendations = [
     {
       pillar: "digital_infrastructure",
@@ -171,13 +172,9 @@ function InterventionRecommendations({ pillars }) {
               borderRadius: "20px",
               py: 3,
               px: 1,
-              // background: "black",
-              background: "#202124",
-              border: `0.05px solid #888383a9`,
-              // boxShadow:
-              //   theme.palette.mode === "dark"
-              //     ? "0 8px 26px #022e"
-              //     : "0 2px 12px #bcbcbcff",
+              background: isDark ? "#202124" : "#ffffff",
+              border: isDark ? "0.05px solid #888383a9" : "1px solid #e0e0e0",
+              boxShadow: isDark ? "none" : "0 2px 12px rgba(0,0,0,0.08)",
               minWidth: 215,
               minHeight: 260,
               display: "flex",
@@ -229,7 +226,7 @@ function InterventionRecommendations({ pillars }) {
                 }}
               >
                 <Typography
-                  color={"white"}
+                  color={isDark ? "white" : "#333"}
                   fontWeight={600}
                   fontSize={16}
                   paddingLeft={1}
@@ -297,45 +294,43 @@ function InterventionRecommendations({ pillars }) {
               sx={{ mt: 1.6, flexWrap: "wrap" }}
             > */}
             <Box sx={{ mt: "auto" }}>
-              <div
-                style={{ border: "0.5px solid #888383a9", marginBottom: 10 }}
-              ></div>
-              <div>
-                <div
-                  style={{
+              <Box
+                sx={{ borderTop: isDark ? "0.5px solid #888383a9" : "1px solid #e0e0e0", mb: 1.5, mt: 1 }}
+              />
+              <Box>
+                <Box
+                  sx={{
                     fontWeight: 600,
-                    color: "white",
-                    display: "flex",
-                    alignContent: "center",
-                    // justifyContent: "flex-start",
-                    fontSize: 14,
-                    gap: 40,
-                    paddingLeft: 6,
-                  }}
-                >
-                  <div style={{ color: palette.dark.tract2 }}>Effect: </div>{" "}
-                  {/* <RecChip label={rec.impact} color={recTheme.color} /> */}
-                  <div style={{ color: "white", paddingRight: 4 }}>
-                    {rec.impact}
-                  </div>
-                </div>{" "}
-                <div
-                  style={{
-                    fontWeight: 600,
-                    color: "white",
+                    color: isDark ? "white" : "#333",
                     display: "flex",
                     alignItems: "center",
                     fontSize: 14,
-                    paddingLeft: 6,
+                    gap: 5,
+                    pl: 1,
                   }}
                 >
-                  <div style={{ color: palette.dark.tract2 }}>Timeline:</div>
+                  <Box sx={{ color: palette.dark.tract2 }}>Effect:</Box>
+                  <Box sx={{ color: isDark ? "white" : "#333", pr: 0.5 }}>
+                    {rec.impact}
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    fontWeight: 600,
+                    color: isDark ? "white" : "#333",
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: 14,
+                    pl: 1,
+                  }}
+                >
+                  <Box sx={{ color: palette.dark.tract2 }}>Timeline:</Box>
                   <RecChip
                     label={rec.timeline}
                     color={theme.palette.secondary.main}
                   />
-                </div>
-              </div>
+                </Box>
+              </Box>
               {/* </Stack> */}
             </Box>
           </Paper>

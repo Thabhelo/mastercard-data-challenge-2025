@@ -19,7 +19,7 @@ export const palette = {
     tract2: "#1f77b4",
   },
   light: {
-    background: "#f2f2f2",
+    background: "#f8f9fa",
     paper: "#ffffff",
     accent: "#1e40af",
     accent2: "#8b5cf6",
@@ -31,6 +31,8 @@ export const palette = {
     shadow: "0 2px 16px 0 rgba(20,60,140,0.11)",
     chartBlue: "#1d4ed8",
     chartPurple: "#b376fa",
+    tract1: "#ff7f0e",
+    tract2: "#1f77b4",
   },
 };
 

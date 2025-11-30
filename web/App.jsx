@@ -1,10 +1,12 @@
 import React, { useMemo, useState } from "react";
+import { ThemeProvider } from "@mui/material/styles";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import TractComparisonDashboard from "./components/TractComparisonDashboard";
 import Typography from "@mui/material/Typography";
 import { motion } from "framer-motion";
+import ThemeToggle from "./components/ThemeToggle";
 import {
   dashboardTheme,
   Header,
@@ -17,6 +19,9 @@ function App() {
   const [comparisonData, setComparisonData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
+  const [isDark, setIsDark] = useState(false); // Light mode default
+
+  const theme = useMemo(() => dashboardTheme(isDark ? "dark" : "light"), [isDark]);
 
   const theme = useMemo(() => dashboardTheme("dark"), []);
 
@@ -25,9 +30,6 @@ function App() {
       try {
         setLoading(true);
         const comparisonResponse = await fetch("/data/tract_comparison.json");
-
-        // console.log("comparisonResponse:", comparisonResponse);
-
         const comparison = await comparisonResponse.json();
         setComparisonData(comparison);
       } catch (err) {
@@ -43,7 +45,18 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Root>
-        {/* Theme toggle removed (light-only) */}
+        {/* Theme Toggle */}
+        <Box
+          sx={{
+            position: "fixed",
+            top: 20,
+            right: 24,
+            zIndex: 1000,
+          }}
+        >
+          <ThemeToggle isDark={isDark} onToggle={() => setIsDark(!isDark)} />
+        </Box>
+
         <Header>
           <Typography
             variant="h1"

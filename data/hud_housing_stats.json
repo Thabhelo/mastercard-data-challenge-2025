@@ -1,0 +1,26 @@
+{
+  "county": "Talladega County, AL",
+  "fips": "01121",
+  "data_year": 2023,
+  "housing_units": {
+    "public_housing_units": 498,
+    "housing_choice_vouchers": 892,
+    "project_based_section_8": 215,
+    "total_assisted_units": 1605
+  },
+  "waiting_lists": {
+    "public_housing_waitlist": 285,
+    "voucher_waitlist": 1420,
+    "average_wait_months": 24
+  },
+  "occupancy": {
+    "public_housing_occupancy_rate": 0.94,
+    "voucher_utilization_rate": 0.89
+  },
+  "demographics": {
+    "pct_elderly_head": 0.28,
+    "pct_disabled_head": 0.31,
+    "pct_with_children": 0.42,
+    "avg_household_income": 12500
+  }
+}
