@@ -8,8 +8,6 @@ import TractComparisonDashboard from "./components/TractComparisonDashboard";
 import InterventionSimulator from "./components/InterventionSimulator";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import { motion } from "framer-motion";
 
 // Modern SaaS color palette
