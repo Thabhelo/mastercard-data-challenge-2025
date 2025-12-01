@@ -1,68 +1,86 @@
 import React, { useMemo } from "react";
-import { Box, Typography, Paper } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
-import {
-  RadarChart,
-  Radar,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-} from "recharts";
 import WifiIcon from "@mui/icons-material/Wifi";
 import BuildIcon from "@mui/icons-material/Build";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import HomeIcon from "@mui/icons-material/Home";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
+import PaidIcon from "@mui/icons-material/Paid";
+import { palette } from "../utils/theme.jsx";
 
-// Color palette
-const colors = {
-  primary: "#3b82f6",
-  secondary: "#06b6d4",
-  emerald: "#10b981",
-  amber: "#f59e0b",
-  slate800: "#1e293b",
-  slate600: "#475569",
-  slate400: "#94a3b8",
-};
-
+// const unifiedAccent = "#1e40af";
+const unifiedAccent = palette.dark.tract2;
 const pillarConfig = {
   digital_infrastructure: {
     title: "Digital Infrastructure",
-    shortName: "Digital",
-    icon: <WifiIcon sx={{ fontSize: 24 }} />,
-    color: colors.primary,
-    bgColor: "#eff6ff",
+    icon: <WifiIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    accent: unifiedAccent,
   },
   workforce_development: {
     title: "Workforce Development",
-    shortName: "Workforce",
-    icon: <BuildIcon sx={{ fontSize: 24 }} />,
-    color: colors.secondary,
-    bgColor: "#ecfeff",
+    icon: <BuildIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    accent: unifiedAccent,
   },
   entrepreneurship: {
     title: "Entrepreneurship",
-    shortName: "Entrepreneurship",
-    icon: <BusinessCenterIcon sx={{ fontSize: 24 }} />,
-    color: colors.emerald,
-    bgColor: "#dcfce7",
+    icon: <BusinessCenterIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    accent: unifiedAccent,
   },
   housing_transportation: {
     title: "Housing & Transportation",
-    shortName: "Housing",
-    icon: <HomeIcon sx={{ fontSize: 24 }} />,
-    color: colors.amber,
-    bgColor: "#fef3c7",
+    icon: <ApartmentIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    accent: unifiedAccent,
+  },
+  health_wellbeing: {
+    title: "Health & Wellbeing",
+    icon: (
+      <HealthAndSafetyIcon fontSize="large" sx={{ color: unifiedAccent }} />
+    ),
+    accent: unifiedAccent,
+  },
+  policy_income: {
+    title: "Policy & Income",
+    icon: <PaidIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    accent: unifiedAccent,
   },
 };
 
+const variants = {
+  card: {
+    hidden: { opacity: 0, y: 22 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.54, type: "spring", bounce: 0.31 },
+    },
+  },
+};
+
+const GapBar = ({ value, color }) => (
+  <motion.div
+    initial={{ width: 0 }}
+    animate={{ width: `${Math.min(Math.abs(value), 100)}%` }}
+    transition={{ duration: 1.1, type: "spring", bounce: 0.1 }}
+    style={{
+      background: color,
+      borderRadius: 14,
+      height: 7,
+      minWidth: 8,
+      marginLeft: 5,
+      marginRight: 8,
+      display: "inline-block",
+      verticalAlign: "middle",
+    }}
+  />
+);
+
+// Priority badges removed per request
+
 function StrategyPillarsView({ pillars }) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+  
   const items = useMemo(() => {
     return Object.entries(pillars)
       .map(([key, pillar]) => {
@@ -72,205 +90,110 @@ function StrategyPillarsView({ pillars }) {
           ([, val]) => val !== null && val !== undefined
         );
         if (realMetrics.length === 0) return null;
-        return { key, pillar, config, realMetrics };
+        const card = (
+          <Box
+            component={motion.div}
+            key={key}
+            variants={variants.card}
+            sx={{
+              background: isDark ? "#202124" : "#ffffff",
+              borderRadius: "10px",
+              p: 3,
+              minHeight: 280,
+              display: "flex",
+              flexDirection: "column",
+              gap: 1.7,
+              border: isDark ? "0.05px solid #888383a9" : "1px solid #e0e0e0",
+              boxShadow: isDark ? "none" : "0 2px 8px rgba(0,0,0,0.06)",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                mb: 0.7,
+              }}
+            >
+              {config.icon}
+              <Typography
+                variant="h3"
+                fontWeight={700}
+                fontSize={19}
+                sx={{ ml: 0.7 }}
+              >
+                {config.title}
+              </Typography>
+            </Box>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              fontWeight={500}
+              sx={{ mb: 1 }}
+            >
+              {pillar.description}
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.3 }}>
+              {realMetrics.map(([name, gap]) => (
+                <Box
+                  key={name}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.3,
+                    mt: 0.2,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: isDark ? "#ddddddff" : "#333333",
+                      fontWeight: 600,
+                      fontSize: 14,
+                      minWidth: 56,
+                    }}
+                  >
+                    {name}
+                  </Typography>
+                  <GapBar value={gap} color={palette.dark.tract1} />
+                  <motion.span
+                    initial={{ opacity: 0, x: 15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.53, type: "spring", bounce: 0.39 }}
+                    style={{
+                      fontWeight: 700,
+                      color: gap > 0 ? "white" : "#ef4444",
+                      fontSize: 15,
+                      letterSpacing: "0.013em",
+                    }}
+                  >
+                    {gap > 0 ? "+" : ""}
+                    {gap.toFixed(1)}
+                  </motion.span>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        );
+        return { key, card };
       })
       .filter(Boolean)
       .slice(0, 4);
-  }, [pillars]);
-
-  // Radar chart data for pillar performance
-  const radarData = items.map(({ config, realMetrics }) => {
-    const avgValue =
-      realMetrics.reduce((sum, [, val]) => sum + Math.abs(val), 0) /
-      realMetrics.length;
-    return {
-      pillar: config.shortName,
-      current: Math.min(100, Math.max(0, 50 - avgValue)),
-      target: 75,
-      fullMark: 100,
-    };
-  });
-
-  // Gap analysis bar chart data - sorted by gap descending
-  const gapData = items
-    .map(({ config, realMetrics }) => {
-      const avgGap =
-        realMetrics.reduce((sum, [, val]) => sum + Math.abs(val), 0) /
-        realMetrics.length;
-      return {
-        name: config.shortName,
-        gap: avgGap,
-        color: config.color,
-      };
-    })
-    .sort((a, b) => b.gap - a.gap);
+  }, [pillars, isDark]);
 
   if (!items.length) return null;
 
   return (
-    <Box sx={{ width: "100%" }}>
-      {/* Charts Section - Two cards side by side */}
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-          gap: 3,
-        }}
-      >
-        {/* Radar Chart */}
-        <Paper
-          component={motion.div}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          sx={{
-            borderRadius: "16px",
-            p: 4,
-            background: "#ffffff",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-            border: "1px solid #f1f5f9",
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: 16,
-              fontWeight: 700,
-              color: colors.slate800,
-              mb: 3,
-              textAlign: "center",
-            }}
-          >
-            Current vs Target Performance
-          </Typography>
-          <ResponsiveContainer width="100%" height={260}>
-            <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
-              <PolarGrid stroke="#e2e8f0" />
-              <PolarAngleAxis
-                dataKey="pillar"
-                tick={{ fill: colors.slate600, fontSize: 12 }}
-              />
-              <PolarRadiusAxis
-                angle={90}
-                domain={[0, 100]}
-                tick={{ fill: colors.slate400, fontSize: 10 }}
-                axisLine={false}
-                tickCount={5}
-              />
-              <Radar
-                name="Current"
-                dataKey="current"
-                stroke={colors.primary}
-                fill={colors.primary}
-                fillOpacity={0.3}
-                strokeWidth={2}
-              />
-              <Radar
-                name="Target"
-                dataKey="target"
-                stroke={colors.emerald}
-                fill={colors.emerald}
-                fillOpacity={0.1}
-                strokeWidth={2}
-                strokeDasharray="6 4"
-              />
-            </RadarChart>
-          </ResponsiveContainer>
-          {/* Legend */}
-          <Box
-            sx={{ display: "flex", justifyContent: "center", gap: 4, mt: 2 }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Box
-                sx={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: "50%",
-                  backgroundColor: colors.primary,
-                }}
-              />
-              <Typography sx={{ fontSize: 13, color: colors.slate600 }}>
-                Current
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Box
-                sx={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: "50%",
-                  backgroundColor: colors.emerald,
-                }}
-              />
-              <Typography sx={{ fontSize: 13, color: colors.slate600 }}>
-                Target
-              </Typography>
-            </Box>
-          </Box>
-        </Paper>
-
-        {/* Gap Analysis Bar Chart */}
-        <Paper
-          component={motion.div}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          sx={{
-            borderRadius: "16px",
-            p: 4,
-            background: "#ffffff",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-            border: "1px solid #f1f5f9",
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: 16,
-              fontWeight: 700,
-              color: colors.slate800,
-              mb: 3,
-              textAlign: "center",
-            }}
-          >
-            Gap Analysis by Category
-          </Typography>
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart
-              data={gapData}
-              layout="vertical"
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            >
-              <XAxis
-                type="number"
-                tick={{ fill: colors.slate400, fontSize: 11 }}
-                axisLine={{ stroke: "#e2e8f0" }}
-                tickLine={false}
-                domain={[0, 60]}
-              />
-              <YAxis
-                dataKey="name"
-                type="category"
-                tick={{ fill: colors.slate600, fontSize: 13 }}
-                axisLine={false}
-                tickLine={false}
-                width={100}
-              />
-              <Tooltip
-                contentStyle={{
-                  borderRadius: "8px",
-                  border: "1px solid #e2e8f0",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-                }}
-                formatter={(value) => [`${value.toFixed(1)} pts`, "Gap"]}
-              />
-              <Bar dataKey="gap" radius={[0, 6, 6, 0]} barSize={28}>
-                {gapData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </Paper>
-      </Box>
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: { xs: "1fr", md: "repeat(4, 1fr)" },
+        gap: 7.5,
+        width: "100%",
+      }}
+    >
+      {items.map(({ key, card }) => (
+        <Box key={key}>{card}</Box>
+      ))}
     </Box>
   );
 }

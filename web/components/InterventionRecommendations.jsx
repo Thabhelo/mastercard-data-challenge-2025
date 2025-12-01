@@ -1,133 +1,95 @@
-import React from "react";
-import { Box, Typography, Paper, Chip } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Chip,
+  Paper,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  useTheme,
+  Avatar,
+} from "@mui/material";
 import { motion } from "framer-motion";
 import WifiIcon from "@mui/icons-material/Wifi";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import HomeIcon from "@mui/icons-material/Home";
-import SchoolIcon from "@mui/icons-material/School";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import GroupWorkIcon from "@mui/icons-material/GroupWork";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import { palette } from "../utils/theme.jsx";
 
-// Color palette
-const colors = {
-  primary: "#3b82f6",
-  secondary: "#06b6d4",
-  emerald: "#10b981",
-  amber: "#f59e0b",
-  slate800: "#1e293b",
-  slate600: "#475569",
-  slate400: "#94a3b8",
-};
-
+const unifiedAccent = palette.dark.tract2;
 const recConfig = {
   digital_infrastructure: {
-    icon: <WifiIcon sx={{ fontSize: 22 }} />,
-    color: colors.primary,
-    bgColor: "#eff6ff",
+    icon: <WifiIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    color: unifiedAccent,
   },
   entrepreneurship: {
-    icon: <BusinessCenterIcon sx={{ fontSize: 22 }} />,
-    color: colors.emerald,
-    bgColor: "#dcfce7",
+    icon: <BusinessCenterIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    color: unifiedAccent,
   },
   housing_transportation: {
-    icon: <HomeIcon sx={{ fontSize: 22 }} />,
-    color: colors.amber,
-    bgColor: "#fef3c7",
+    icon: <ApartmentIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    color: unifiedAccent,
   },
   workforce_development: {
-    icon: <SchoolIcon sx={{ fontSize: 22 }} />,
-    color: colors.secondary,
-    bgColor: "#cffafe",
+    icon: <GroupWorkIcon fontSize="large" sx={{ color: unifiedAccent }} />,
+    color: unifiedAccent,
   },
 };
 
-// Priority badge component
-const PriorityBadge = ({ priority }) => {
-  const isHigh = priority === "HIGH";
+const gridVariants = {
+  visible: { transition: { staggerChildren: 0.13 } },
+};
+const cardVariants = {
+  hidden: { opacity: 0, x: 24 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.52, type: "spring", bounce: 0.2 },
+  },
+};
+
+function RecChip({ label, color }) {
+  if (label.toLowerCase() === "high") {
+    color = "#FF0000";
+  } else if (label.toLowerCase() === "medium") {
+    color = "#FFA500";
+  } else if (label.toLowerCase() === "low") {
+    color = "#008000";
+  }
   return (
     <Chip
-      label={priority}
-      size="small"
+      label={label}
       sx={{
-        backgroundColor: isHigh ? "#dcfce7" : "#fef3c7",
-        color: isHigh ? colors.emerald : "#b45309",
-        fontSize: 11,
+        bgcolor: color + "22",
+        color: color,
         fontWeight: 700,
-        height: 24,
-        borderRadius: "6px",
+        fontSize: 14,
+        px: 1.6,
+        py: 0.6,
+        borderRadius: 99,
+        mr: 1.3,
       }}
     />
   );
-};
-
-// Gap score display
-const GapScore = ({ gap, color }) => (
-  <Box
-    sx={{
-      display: "inline-flex",
-      alignItems: "baseline",
-      gap: 0.5,
-      px: 2,
-      py: 1,
-      borderRadius: "10px",
-      backgroundColor: "#f8fafc",
-      border: "1px solid #e2e8f0",
-    }}
-  >
-    <Typography sx={{ fontSize: 13, color: colors.slate400 }}>
-      Gap Score:
-    </Typography>
-    <Typography sx={{ fontSize: 22, fontWeight: 700, color: color }}>
-      {gap?.toFixed(1)}
-    </Typography>
-    <Typography sx={{ fontSize: 12, color: colors.slate400 }}>pts</Typography>
-  </Box>
-);
-
-// Action item component
-const ActionItem = ({ text, color }) => (
-  <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1.5, py: 0.75 }}>
-    <CheckCircleIcon
-      sx={{ fontSize: 18, color: color, mt: 0.2, flexShrink: 0 }}
-    />
-    <Typography sx={{ fontSize: 13, color: colors.slate600, lineHeight: 1.5 }}>
-      {text}
-    </Typography>
-  </Box>
-);
-
-// Impact estimate component
-const ImpactEstimate = ({ impact, timeline }) => (
-  <Box sx={{ mt: "auto", pt: 3 }}>
-    <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-      <TrendingUpIcon sx={{ fontSize: 16, color: colors.emerald }} />
-      <Typography sx={{ fontSize: 13, color: colors.emerald, fontWeight: 600 }}>
-        {impact}
-      </Typography>
-    </Box>
-    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-      <AccessTimeIcon sx={{ fontSize: 16, color: colors.slate400 }} />
-      <Typography sx={{ fontSize: 13, color: colors.slate600 }}>
-        Timeline: <strong>{timeline}</strong>
-      </Typography>
-    </Box>
-  </Box>
-);
+}
 
 function InterventionRecommendations({ pillars }) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   const recommendations = [
     {
       pillar: "digital_infrastructure",
       title: "Expand Broadband Access",
       priority: "HIGH",
-      gap: pillars.digital_infrastructure?.metrics?.["Internet Access Score"],
+      gap: pillars.digital_infrastructure.metrics["Internet Access Score"],
       actions: [
-        "Partner with ISPs for last-mile fiber",
-        "Publicize Affordable Connectivity Program",
-        "Digital literacy training programs",
-        "Device lending for households",
+        "Partner with ISPs to deploy last-mile fiber infrastructure",
+        "Publicize Affordable Connectivity Program through local hubs",
+        "Establish digital literacy training",
+        "Launch device lending for households",
       ],
       impact: "Could improve IGS by 8-12 pts",
       timeline: "12-18 months",
@@ -136,149 +98,245 @@ function InterventionRecommendations({ pillars }) {
       pillar: "entrepreneurship",
       title: "Support Small Business Creation",
       priority: "HIGH",
-      gap: pillars.entrepreneurship?.metrics?.[
+      gap: pillars.entrepreneurship.metrics[
         "Minority/Women Owned Businesses Score"
       ],
       actions: [
-        "Micro-loans and startup grants",
-        "Business incubator programs",
-        "Free business planning services",
-        "Local procurement set-asides",
+        "Micro-loans and grants for startups",
+        "Business incubator and mentoring",
+        "Business planning and accounting help",
+        "Procurement set-asides for local small business",
       ],
-      impact: "Could improve IGS by 5-8 pts",
+      impact: "Could improve IGS by 5-8 pts, 15-20 new businesses",
       timeline: "9-12 months",
     },
     {
       pillar: "housing_transportation",
       title: "Improve Housing Affordability",
       priority: "HIGH",
-      gap: pillars.housing_transportation?.metrics?.[
-        "Affordable Housing Score"
-      ],
+      gap: pillars.housing_transportation.metrics["Affordable Housing Score"],
       actions: [
-        "Housing tax credit programs",
-        "Vacant property renovation",
-        "Rent-to-own initiatives",
-        "Transit links to job centers",
+        "Leverage housing tax credits",
+        "Renovate vacant properties",
+        "Rent-to-own programs",
+        "Develop public transit links to jobs",
       ],
-      impact: "Could improve IGS by 6-10 pts",
+      impact: "Could improve IGS by 6-10 pts, reduce burden",
       timeline: "18-24 months",
     },
     {
       pillar: "workforce_development",
-      title: "Sector-Aligned Training",
+      title: "Sector-Aligned Training Programs",
       priority: "MEDIUM",
-      gap: pillars.workforce_development?.metrics?.[
+      gap: pillars.workforce_development.metrics[
         "Labor Market Engagement Index Score"
       ],
       actions: [
-        "Apprenticeship programs",
-        "GED and adult education",
-        "Childcare for trainees",
+        "Launch apprenticeships",
+        "GED and adult ed expansion",
+        "Provide child care for trainees",
         "Employer-partnered curriculum",
       ],
       impact: "Could improve IGS by 4-7 pts",
       timeline: "12-15 months",
     },
   ];
-
   const filtered = recommendations.filter(
     (r) => typeof r.gap === "number" && Math.abs(r.gap) > 5
   );
 
   return (
     <Box
+      component={motion.div}
+      initial="hidden"
+      animate="visible"
+      variants={gridVariants}
       sx={{
         display: "grid",
-        gridTemplateColumns: {
-          xs: "1fr",
-          sm: "repeat(2, 1fr)",
-          lg: "repeat(4, 1fr)",
-        },
-        gap: 3,
+        gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(4,1fr)" },
+        gap: 4,
         width: "100%",
+        minHeight: 300,
       }}
     >
       {filtered.map((rec, i) => {
         const recTheme = recConfig[rec.pillar];
+        const showGap = typeof rec.gap === "number";
         return (
           <Paper
             component={motion.div}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
+            variants={cardVariants}
+            elevation={5}
             key={rec.title}
             sx={{
-              borderRadius: "16px",
-              p: 3,
-              background: "#ffffff",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-              border: "1px solid #f1f5f9",
+              borderRadius: "20px",
+              py: 3,
+              px: 1,
+              background: isDark ? "#202124" : "#ffffff",
+              border: isDark ? "0.05px solid #888383a9" : "1px solid #e0e0e0",
+              boxShadow: isDark ? "none" : "0 2px 12px rgba(0,0,0,0.08)",
+              minWidth: 215,
+              minHeight: 260,
               display: "flex",
               flexDirection: "column",
-              minHeight: 400,
+              gap: 1.3,
+              position: "relative",
+              overflow: "visible",
+              mb: 2,
             }}
           >
-            {/* Header - Icon and Priority */}
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
-                mb: 2.5,
+                gap: 1,
+                mb: 0.8,
               }}
             >
-              <Box
+              <Avatar
                 sx={{
+                  bgcolor: recTheme.color + "22",
+                  color: recTheme.color,
                   width: 44,
                   height: 44,
-                  borderRadius: "12px",
-                  backgroundColor: recTheme.bgColor,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: recTheme.color,
+                  boxShadow: theme.shadows[4],
+                  mr: 0.6,
                 }}
               >
                 {recTheme.icon}
-              </Box>
-              <PriorityBadge priority={rec.priority} />
+              </Avatar>
+              <Typography
+                variant="h3"
+                fontWeight={600}
+                fontSize={16}
+                sx={{ flex: 1 }}
+              >
+                {rec.title}
+              </Typography>
+              <RecChip label={rec.priority} color={recTheme.color} />
             </Box>
-
-            {/* Title */}
-            <Typography
-              sx={{
-                fontSize: 17,
-                fontWeight: 700,
-                color: colors.slate800,
-                mb: 2,
-                lineHeight: 1.3,
-              }}
-            >
-              {rec.title}
-            </Typography>
-
-            {/* Gap Score */}
-            {typeof rec.gap === "number" && (
-              <Box sx={{ mb: 2.5 }}>
-                <GapScore gap={rec.gap} color={recTheme.color} />
+            {showGap && (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.2,
+                  mt: 0.5,
+                  mb: 0.6,
+                }}
+              >
+                <Typography
+                  color={isDark ? "white" : "#333"}
+                  fontWeight={600}
+                  fontSize={16}
+                  paddingLeft={1}
+                >
+                  Gap:
+                </Typography>
+                <motion.span
+                  initial={{ opacity: 0, x: 14 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.47, type: "spring", bounce: 0.18 }}
+                  style={{
+                    color: "orange",
+                    fontWeight: 700,
+                    fontSize: 20,
+                  }}
+                >
+                  {rec.gap.toFixed(1)} pts
+                </motion.span>
               </Box>
             )}
-
-            {/* Actions List */}
-            <Box sx={{ mb: 2 }}>
+            <List
+              sx={{
+                pl: 1,
+                pr: 1,
+                display: "flex",
+                flexDirection: "column",
+                gap: 0.7,
+              }}
+            >
               {rec.actions.map((action, idx) => (
-                <ActionItem key={idx} text={action} color={recTheme.color} />
+                <ListItem
+                  disableGutters
+                  sx={{
+                    py: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    gap: 0,
+                  }}
+                  key={action}
+                  component={motion.li}
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.23 + idx * 0.08 }}
+                >
+                  <ListItemIcon>
+                    <CheckCircleRoundedIcon
+                      sx={{ color: recTheme.color, fontSize: 23, minWidth: 0 }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={action}
+                    primaryTypographyProps={{
+                      fontSize: 15,
+                      color: theme.palette.text.secondary,
+                      fontWeight: 500,
+                    }}
+                  />
+                </ListItem>
               ))}
+            </List>
+            {/* <Stack
+              direction="row"
+              spacing={2}
+              sx={{ mt: 1.6, flexWrap: "wrap" }}
+            > */}
+            <Box sx={{ mt: "auto" }}>
+              <Box
+                sx={{ borderTop: isDark ? "0.5px solid #888383a9" : "1px solid #e0e0e0", mb: 1.5, mt: 1 }}
+              />
+              <Box>
+                <Box
+                  sx={{
+                    fontWeight: 600,
+                    color: isDark ? "white" : "#333",
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: 14,
+                    gap: 5,
+                    pl: 1,
+                  }}
+                >
+                  <Box sx={{ color: palette.dark.tract2 }}>Effect:</Box>
+                  <Box sx={{ color: isDark ? "white" : "#333", pr: 0.5 }}>
+                    {rec.impact}
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    fontWeight: 600,
+                    color: isDark ? "white" : "#333",
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: 14,
+                    pl: 1,
+                  }}
+                >
+                  <Box sx={{ color: palette.dark.tract2 }}>Timeline:</Box>
+                  <RecChip
+                    label={rec.timeline}
+                    color={theme.palette.secondary.main}
+                  />
+                </Box>
+              </Box>
+              {/* </Stack> */}
             </Box>
-
-            {/* Impact Estimate */}
-            <ImpactEstimate impact={rec.impact} timeline={rec.timeline} />
           </Paper>
         );
       })}
     </Box>
   );
 }
-
 export default InterventionRecommendations;
