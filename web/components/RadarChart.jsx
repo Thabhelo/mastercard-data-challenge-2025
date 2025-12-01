@@ -16,7 +16,9 @@ export default function RadarChart() {
 
     const ctx = canvasRef.current.getContext("2d");
     const textColor = isDark ? "#ddd" : "#333";
-    const gridColor = isDark ? "rgba(200, 200, 200, 0.2)" : "rgba(0, 0, 0, 0.1)";
+    const gridColor = isDark
+      ? "rgba(200, 200, 200, 0.2)"
+      : "rgba(0, 0, 0, 0.1)";
 
     const data = {
       labels: [
@@ -86,7 +88,9 @@ export default function RadarChart() {
               color: gridColor,
             },
             angleLines: {
-              color: isDark ? "rgba(200, 200, 200, 0.3)" : "rgba(0, 0, 0, 0.15)",
+              color: isDark
+                ? "rgba(200, 200, 200, 0.3)"
+                : "rgba(0, 0, 0, 0.15)",
             },
             pointLabels: {
               color: textColor,
