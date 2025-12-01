@@ -145,7 +145,9 @@ function App() {
             </Box>
           ) : (
             <>
-              {activeTab === 0 && <TractComparisonDashboard data={comparisonData} />}
+              {activeTab === 0 && (
+                <TractComparisonDashboard data={comparisonData} />
+              )}
               {activeTab === 1 && <InterventionSimulator />}
             </>
           )}
