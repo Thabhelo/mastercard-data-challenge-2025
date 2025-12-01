@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import TractComparisonDashboard from "./components/TractComparisonDashboard";
 import InterventionSimulator from "./components/InterventionSimulator";
 import Paper from "@mui/material/Paper";
@@ -140,8 +142,12 @@ function App() {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
   const [isDark, setIsDark] = useState(false); // Light mode default
+  const [activeTab, setActiveTab] = useState(0); // 0 = Dashboard, 1 = Intervention Simulator
 
-  const theme = useMemo(() => dashboardTheme(isDark ? "dark" : "light"), [isDark]);
+  const theme = useMemo(
+    () => dashboardTheme(isDark ? "dark" : "light"),
+    [isDark]
+  );
 
   React.useEffect(() => {
     const loadData = async () => {
@@ -202,6 +208,34 @@ function App() {
           >
             Data-driven Insights for Economic Inclusion
           </Typography>
+
+          {/* Tab Navigation */}
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+            <Tabs
+              value={activeTab}
+              onChange={(e, newValue) => setActiveTab(newValue)}
+              sx={{
+                "& .MuiTab-root": {
+                  textTransform: "none",
+                  fontWeight: 500,
+                  fontSize: "1rem",
+                  color: theme.palette.text.secondary,
+                  "&.Mui-selected": {
+                    color: "#10b981",
+                    fontWeight: 600,
+                  },
+                },
+                "& .MuiTabs-indicator": {
+                  backgroundColor: "#10b981",
+                  height: 3,
+                  borderRadius: 2,
+                },
+              }}
+            >
+              <Tab label="Dashboard" />
+              <Tab label="Intervention Simulator" />
+            </Tabs>
+          </Box>
         </Header>
 
         {/* Navigation Tabs */}
@@ -241,10 +275,10 @@ function App() {
             </Box>
           ) : (
             <>
-              {tabValue === 0 && (
+              {activeTab === 0 && (
                 <TractComparisonDashboard data={comparisonData} />
               )}
-              {tabValue === 1 && <InterventionSimulator />}
+              {activeTab === 1 && <InterventionSimulator />}
             </>
           )}
         </main>
