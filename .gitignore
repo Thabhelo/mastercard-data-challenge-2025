@@ -23,3 +23,10 @@ frontend/build/
 
 # Vercel
 .vercel
+
+# Helper scripts
+prepare_submission.py
+generate_interactive_notebook.py
+generate_predictions_json.py
+generate_full_timeline_csv.py
+clean_emojis.py

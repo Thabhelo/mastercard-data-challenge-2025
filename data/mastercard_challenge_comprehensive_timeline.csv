@@ -1,0 +1,145 @@
+tract_fips,Year,Inclusive Growth Score,tract_name,Type
+1121010301,2017,34.0,,Historical
+1121010301,2018,33.0,,Historical
+1121010301,2019,42.0,,Historical
+1121010301,2020,32.0,,Historical
+1121010301,2021,29.0,,Historical
+1121010301,2022,38.0,,Historical
+1121010301,2023,37.0,,Historical
+1121010301,2024,42.0,,Historical
+1121010301,2025,43.41,,Predicted (Baseline)
+1121010301,2025,44.29,,Predicted (Full Intervention)
+1121010301,2026,44.83,,Predicted (Baseline)
+1121010301,2026,47.13,,Predicted (Full Intervention)
+1121010301,2027,46.24,,Predicted (Baseline)
+1121010301,2027,50.08,,Predicted (Full Intervention)
+1121010301,2028,47.65,,Predicted (Baseline)
+1121010301,2028,53.04,,Predicted (Full Intervention)
+1121010301,2029,49.06,,Predicted (Baseline)
+1121010301,2029,55.87,,Predicted (Full Intervention)
+1121010400,2017,52.0,,Historical
+1121010400,2018,50.0,,Historical
+1121010400,2019,50.0,,Historical
+1121010400,2020,50.0,,Historical
+1121010400,2021,50.0,,Historical
+1121010400,2022,47.0,,Historical
+1121010400,2023,54.0,,Historical
+1121010400,2024,52.0,,Historical
+1121010400,2025,52.17,,Predicted (Baseline)
+1121010400,2025,53.06,,Predicted (Full Intervention)
+1121010400,2026,52.35,,Predicted (Baseline)
+1121010400,2026,54.65,,Predicted (Full Intervention)
+1121010400,2027,52.52,,Predicted (Baseline)
+1121010400,2027,56.37,,Predicted (Full Intervention)
+1121010400,2028,52.7,,Predicted (Baseline)
+1121010400,2028,58.08,,Predicted (Full Intervention)
+1121010400,2029,52.87,,Predicted (Baseline)
+1121010400,2029,59.68,,Predicted (Full Intervention)
+1121010500,2017,22.0,Census Tract 105; Talladega County; Alabama,Historical
+1121010500,2018,22.0,Census Tract 105; Talladega County; Alabama,Historical
+1121010500,2019,26.0,Census Tract 105; Talladega County; Alabama,Historical
+1121010500,2020,21.0,Census Tract 105; Talladega County; Alabama,Historical
+1121010500,2021,28.0,Census Tract 105; Talladega County; Alabama,Historical
+1121010500,2022,27.0,Census Tract 105; Talladega County; Alabama,Historical
+1121010500,2023,23.0,Census Tract 105; Talladega County; Alabama,Historical
+1121010500,2024,23.0,Census Tract 105; Talladega County; Alabama,Historical
+1121010500,2025,23.57,Census Tract 105; Talladega County; Alabama,Predicted (Baseline)
+1121010500,2025,24.45,Census Tract 105; Talladega County; Alabama,Predicted (Full Intervention)
+1121010500,2026,24.14,Census Tract 105; Talladega County; Alabama,Predicted (Baseline)
+1121010500,2026,26.45,Census Tract 105; Talladega County; Alabama,Predicted (Full Intervention)
+1121010500,2027,24.71,Census Tract 105; Talladega County; Alabama,Predicted (Baseline)
+1121010500,2027,28.56,Census Tract 105; Talladega County; Alabama,Predicted (Full Intervention)
+1121010500,2028,25.28,Census Tract 105; Talladega County; Alabama,Predicted (Baseline)
+1121010500,2028,30.67,Census Tract 105; Talladega County; Alabama,Predicted (Full Intervention)
+1121010500,2029,25.85,Census Tract 105; Talladega County; Alabama,Predicted (Baseline)
+1121010500,2029,32.66,Census Tract 105; Talladega County; Alabama,Predicted (Full Intervention)
+1121010600,2017,42.0,,Historical
+1121010600,2018,34.0,,Historical
+1121010600,2019,29.0,,Historical
+1121010600,2020,30.0,,Historical
+1121010600,2021,37.0,,Historical
+1121010600,2022,26.0,,Historical
+1121010600,2023,34.0,,Historical
+1121010600,2024,33.0,,Historical
+1121010600,2025,32.27,,Predicted (Baseline)
+1121010600,2025,33.15,,Predicted (Full Intervention)
+1121010600,2026,31.54,,Predicted (Baseline)
+1121010600,2026,33.84,,Predicted (Full Intervention)
+1121010600,2027,30.81,,Predicted (Baseline)
+1121010600,2027,34.65,,Predicted (Full Intervention)
+1121010600,2028,30.08,,Predicted (Baseline)
+1121010600,2028,35.46,,Predicted (Full Intervention)
+1121010600,2029,29.35,,Predicted (Baseline)
+1121010600,2029,36.16,,Predicted (Full Intervention)
+1121010700,2017,39.0,,Historical
+1121010700,2018,38.0,,Historical
+1121010700,2019,30.0,,Historical
+1121010700,2020,32.0,,Historical
+1121010700,2021,38.0,,Historical
+1121010700,2022,33.0,,Historical
+1121010700,2023,32.0,,Historical
+1121010700,2024,32.0,,Historical
+1121010700,2025,31.16,,Predicted (Baseline)
+1121010700,2025,32.04,,Predicted (Full Intervention)
+1121010700,2026,30.32,,Predicted (Baseline)
+1121010700,2026,32.62,,Predicted (Full Intervention)
+1121010700,2027,29.48,,Predicted (Baseline)
+1121010700,2027,33.32,,Predicted (Full Intervention)
+1121010700,2028,28.63,,Predicted (Baseline)
+1121010700,2028,34.02,,Predicted (Full Intervention)
+1121010700,2029,27.79,,Predicted (Baseline)
+1121010700,2029,34.6,,Predicted (Full Intervention)
+1121010900,2017,45.0,,Historical
+1121010900,2018,42.0,,Historical
+1121010900,2019,43.0,,Historical
+1121010900,2020,38.0,,Historical
+1121010900,2021,36.0,,Historical
+1121010900,2022,34.0,,Historical
+1121010900,2023,42.0,,Historical
+1121010900,2024,40.0,,Historical
+1121010900,2025,39.6,,Predicted (Baseline)
+1121010900,2025,40.48,,Predicted (Full Intervention)
+1121010900,2026,39.21,,Predicted (Baseline)
+1121010900,2026,41.51,,Predicted (Full Intervention)
+1121010900,2027,38.81,,Predicted (Baseline)
+1121010900,2027,42.65,,Predicted (Full Intervention)
+1121010900,2028,38.41,,Predicted (Baseline)
+1121010900,2028,43.8,,Predicted (Full Intervention)
+1121010900,2029,38.02,,Predicted (Baseline)
+1121010900,2029,44.82,,Predicted (Full Intervention)
+1121011000,2017,42.0,,Historical
+1121011000,2018,42.0,,Historical
+1121011000,2019,36.0,,Historical
+1121011000,2020,32.0,,Historical
+1121011000,2021,41.0,,Historical
+1121011000,2022,48.0,,Historical
+1121011000,2023,40.0,,Historical
+1121011000,2024,40.0,,Historical
+1121011000,2025,39.83,,Predicted (Baseline)
+1121011000,2025,40.71,,Predicted (Full Intervention)
+1121011000,2026,39.65,,Predicted (Baseline)
+1121011000,2026,41.96,,Predicted (Full Intervention)
+1121011000,2027,39.48,,Predicted (Baseline)
+1121011000,2027,43.32,,Predicted (Full Intervention)
+1121011000,2028,39.3,,Predicted (Baseline)
+1121011000,2028,44.69,,Predicted (Full Intervention)
+1121011000,2029,39.13,,Predicted (Baseline)
+1121011000,2029,45.93,,Predicted (Full Intervention)
+1121011100,2017,43.0,Census Tract 111; Talladega County; Alabama,Historical
+1121011100,2018,50.0,Census Tract 111; Talladega County; Alabama,Historical
+1121011100,2019,40.0,Census Tract 111; Talladega County; Alabama,Historical
+1121011100,2020,42.0,Census Tract 111; Talladega County; Alabama,Historical
+1121011100,2021,50.0,Census Tract 111; Talladega County; Alabama,Historical
+1121011100,2022,56.0,Census Tract 111; Talladega County; Alabama,Historical
+1121011100,2023,50.0,Census Tract 111; Talladega County; Alabama,Historical
+1121011100,2024,50.0,Census Tract 111; Talladega County; Alabama,Historical
+1121011100,2025,50.57,Census Tract 111; Talladega County; Alabama,Predicted (Baseline)
+1121011100,2025,51.45,Census Tract 111; Talladega County; Alabama,Predicted (Full Intervention)
+1121011100,2026,51.14,Census Tract 111; Talladega County; Alabama,Predicted (Baseline)
+1121011100,2026,53.45,Census Tract 111; Talladega County; Alabama,Predicted (Full Intervention)
+1121011100,2027,51.72,Census Tract 111; Talladega County; Alabama,Predicted (Baseline)
+1121011100,2027,55.56,Census Tract 111; Talladega County; Alabama,Predicted (Full Intervention)
+1121011100,2028,52.29,Census Tract 111; Talladega County; Alabama,Predicted (Baseline)
+1121011100,2028,57.67,Census Tract 111; Talladega County; Alabama,Predicted (Full Intervention)
+1121011100,2029,52.86,Census Tract 111; Talladega County; Alabama,Predicted (Baseline)
+1121011100,2029,59.67,Census Tract 111; Talladega County; Alabama,Predicted (Full Intervention)
