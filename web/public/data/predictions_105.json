@@ -1,0 +1,131 @@
+{
+  "tract": "1121010500",
+  "years": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "baseline": [
+    23.57,
+    24.14,
+    24.71,
+    25.28,
+    25.85
+  ],
+  "scenarios": {
+    "": [
+      23.57,
+      24.14,
+      24.71,
+      25.28,
+      25.85
+    ],
+    "digital": [
+      23.77,
+      24.74,
+      25.71,
+      26.68,
+      27.62
+    ],
+    "housing": [
+      23.69,
+      24.49,
+      25.41,
+      26.33,
+      27.22
+    ],
+    "entrepreneurship": [
+      23.7,
+      24.52,
+      25.34,
+      26.16,
+      26.96
+    ],
+    "workforce": [
+      23.77,
+      24.64,
+      25.51,
+      26.38,
+      27.23
+    ],
+    "digital,housing": [
+      23.97,
+      25.25,
+      26.65,
+      28.05,
+      29.39
+    ],
+    "digital,entrepreneurship": [
+      23.98,
+      25.28,
+      26.58,
+      27.88,
+      29.12
+    ],
+    "digital,workforce": [
+      24.05,
+      25.4,
+      26.75,
+      28.1,
+      29.39
+    ],
+    "entrepreneurship,housing": [
+      23.89,
+      25.03,
+      26.28,
+      27.53,
+      28.73
+    ],
+    "housing,workforce": [
+      23.97,
+      25.15,
+      26.45,
+      27.75,
+      29.0
+    ],
+    "entrepreneurship,workforce": [
+      23.98,
+      25.18,
+      26.38,
+      27.58,
+      28.73
+    ],
+    "digital,entrepreneurship,housing": [
+      24.17,
+      25.79,
+      27.52,
+      29.25,
+      30.89
+    ],
+    "digital,housing,workforce": [
+      24.25,
+      25.91,
+      27.69,
+      29.47,
+      31.16
+    ],
+    "digital,entrepreneurship,workforce": [
+      24.26,
+      25.94,
+      27.62,
+      29.3,
+      30.89
+    ],
+    "entrepreneurship,housing,workforce": [
+      24.17,
+      25.69,
+      27.32,
+      28.95,
+      30.5
+    ],
+    "digital,entrepreneurship,housing,workforce": [
+      24.45,
+      26.45,
+      28.56,
+      30.67,
+      32.66
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 const isDev = import.meta.env.DEV || false;
 const mode = import.meta.env.MODE || 'production';
 
-export const API_URL = isDev ? 'http://localhost:8000' : '';
+export const API_URL = isDev ? 'http://localhost:3001' : '';
 
 export const API_ENDPOINTS = {
   predict: `${API_URL}/api/predict`
