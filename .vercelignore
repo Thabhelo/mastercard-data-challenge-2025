@@ -1,0 +1,11 @@
+# Ignore Python backend for frontend-only deployment to avoid size limits
+api/
+ml/
+src/
+data/
+submission/
+notebooks/
+generate_*.py
+prepare_submission.py
+*.joblib
+
