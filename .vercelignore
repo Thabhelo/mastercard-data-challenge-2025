@@ -2,10 +2,8 @@
 api/
 ml/
 src/
-data/
 submission/
 notebooks/
 generate_*.py
 prepare_submission.py
 *.joblib
-
